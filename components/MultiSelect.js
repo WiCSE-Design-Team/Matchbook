@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     dropdown: {
         height: 50, width: 200,
         backgroundColor: 'transparent',
-        borderColor: 'black', borderWidth: '1px', borderRadius: '100%',
+        borderColor: 'black', borderWidth: '1',
         padding: 10
     },
 

@@ -65,17 +65,17 @@ export default CardFlip;
 const styles = StyleSheet.create ({
     front: {
         height: '100%',
-        borderColor: 'black', borderWidth: '1px', borderRadius: '10px',
+        borderColor: 'black', borderWidth: '1', borderRadius: '10',
         backgroundColor: 'white'
     },
     back: {
         height: '100%',
-        borderColor: 'black', borderWidth: '1px', borderRadius: '10px',
+        borderColor: 'black', borderWidth: '1', borderRadius: '10',
         backgroundColor: 'white'
     },
     cardImage: { 
         width: '100%', height: '50%',
-        borderTopLeftRadius: '10px', borderTopRightRadius: '10px'
+        borderTopLeftRadius: '10', borderTopRightRadius: '10'
     },
     cardText: { 
         width: '100%', height: '35%',
@@ -83,12 +83,12 @@ const styles = StyleSheet.create ({
         alignContent: 'left'
     },
     name: { 
-        fontSize: '24px',
+        fontSize: '24',
         fontWeight: 'bold',
         marginBottom: 5
     },
     bio: { 
-        fontSize: '18px'
+        fontSize: '18'
 
     },
     moreInfo: {
@@ -103,7 +103,7 @@ const styles = StyleSheet.create ({
         flexDirection: 'row', gap: 15
     },
     tag: {
-        borderColor: 'black', borderWidth: '1px', borderRadius: '100%',
+        borderColor: 'black', borderWidth: '1',
         padding: 10,
         justifyContent: 'center', alignContent: 'center'
     },

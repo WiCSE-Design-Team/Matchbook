@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     },
     button: {
         width: '45%',
-        borderColor: 'black', borderWidth: '1px', borderRadius: '10px',
+        borderColor: 'black', borderWidth: '1',
         marginTop: 20, marginBottom: 10, padding: 10,
         alignContent: 'center', justifyContent: 'center'
     },
