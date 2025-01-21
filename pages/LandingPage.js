@@ -1,12 +1,39 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import { View, Text, Button, TextInput, StyleSheet, Image, BackHandler } from 'react-native';
+import { FIREBASE_AUTH } from '../FirebaseConfig';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
 
 // this is also the login page
 function LandingPage() {
     const navigation = useNavigation();
-    const [username, setUser] = React.useState('');
+    const [email, setEmail] = React.useState('');
     const [password, setPass] = React.useState('');
+    const auth = FIREBASE_AUTH;
+
+    const signIn = async () => {
+        try{
+            const response = await signInWithEmailAndPassword(auth, email, password);
+            console.log(response);
+            alert("Sign in successful.");
+            navigation.navigate('TabNav');
+        } catch (error) {
+            console.log(error);
+            alert("Sign in failed." + error);
+        }
+        
+    }
+    const signUp = async () => {
+        try{
+            const response = await createUserWithEmailAndPassword(auth, email, password);
+            console.log(response);
+            alert("Sign up successful.");
+            navigation.navigate('TabNav');
+        } catch (error) {
+            console.log(error);
+            alert("Sign up failed.");
+        }
+    }
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -15,9 +42,9 @@ function LandingPage() {
             <Text style={styles.subtitle}>Find your study match!</Text>
             <TextInput
                 style={styles.input}
-                onChangeText = {setUser}
-                placeholder='Username'
-                value = {username}
+                onChangeText = {setEmail}
+                placeholder='Email'
+                value = {email}
             />
             <TextInput
                 secureTextEntry
@@ -32,13 +59,14 @@ function LandingPage() {
                 <Button 
                     title='Login'
                     color="#FE8C46"
-                    onPress={() => navigation.navigate('TabNav')}
+                    onPress = {signIn}
                 />
             </View>
             <View style = {styles.butnsign}>
                 <Button 
                     title='Sign Up'
                     color="#FE8C46"
+                    onPress = {signUp}
                 /></View>
 
         </View>
