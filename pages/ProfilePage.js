@@ -1,7 +1,45 @@
-import * as React from 'react';
+import {React, useState, useEffect} from "react";
 import { View, Text, Image, ImageBackground } from 'react-native';
+import { FIREBASE_AUTH, FIREBASE_DB } from '../FirebaseConfig';
+import {collection, getDocs, orderBy, query, doc, setDoc, getDoc} from "firebase/firestore";
 
 function ProfilePage() {
+    const [fireData, setFireData] = useState(null);
+
+    useEffect (() => {
+        let processing = true;
+        firebaseData(processing);
+        return () => {
+          processing = false;
+        }
+      }, [])
+    
+    const firebaseData = async(processing) => {
+        //this gets user by id
+     
+        const collectionRef = collection(FIREBASE_DB, 'UserInfo');
+
+        //access user
+        var user = FIREBASE_AUTH.currentUser;
+        const docRef = doc(FIREBASE_DB, 'UserInfo', String(user.uid));
+        
+        //get user's info, getDoc = getRow in userInfo table
+        const docSnap = await getDoc(docRef);
+
+        if(docSnap.exists()){
+            console.log(docSnap.data());
+            //set the data
+            setFireData(docSnap.data());
+
+        } else{
+            console.log("User with the id doesn't exist. Fetch failed.")
+        }
+
+    }
+
+    console.log(fireData ? fireData.first_name : "null")
+
+
     return (
         <View style={{ flex: 1, alignItems: 'right', justifyContent: 'center'}}>
             <Image 
@@ -10,7 +48,7 @@ function ProfilePage() {
                 />
             
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ marginLeft: 20, marginTop: 20, fontSize: 25}}>Name</Text>
+                    <Text style={{ marginLeft: 20, marginTop: 20, fontSize: 25}}>{fireData ? fireData.first_name : "fetch name failed"}</Text>
                     <Image 
                         source={{uri: 'https://cdn.iconscout.com/icon/free/png-256/free-edit-icon-download-in-svg-png-gif-file-formats--pen-write-pencil-ball-study-user-interface-vol-2-pack-icons-2202989.png?f=webp&w=256'}} 
                         style={{ width: 20, height: 20, marginLeft: 7, marginTop: 20 }} 
