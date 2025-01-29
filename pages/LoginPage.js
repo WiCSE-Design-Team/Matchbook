@@ -4,8 +4,10 @@ import { View, Text, Button, TextInput, StyleSheet, Image, BackHandler } from 'r
 import { FIREBASE_AUTH } from '../FirebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
 
-// this is also the login page
-function LandingPage() {
+import logo from '../assets/images/logo.png';
+
+// this is also the landing page
+function LoginPage() {
     const navigation = useNavigation();
     const [email, setEmail] = React.useState('');
     const [password, setPass] = React.useState('');
@@ -37,7 +39,7 @@ function LandingPage() {
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        
+            <Image source={logo} style={styles.image} />
             <Text style={styles.title}>Matchbook</Text>
             <Text style={styles.subtitle}>Find your study match!</Text>
             <TextInput
@@ -91,7 +93,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#FE4D55',
         marginBottom: 10,
-
+        fontFamily: 'BaksoSapi'
     },
     subtitle: {
         fontSize: 10,
@@ -119,7 +121,11 @@ const styles = StyleSheet.create({
         marginTop: 40,
         
     },
+    image: {
+        width: 200,
+        height: 200,
+    }
 
   });
 
-export default LandingPage;
+export default LoginPage;

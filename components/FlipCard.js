@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, Image, Text, StyleSheet } from 'react-native';
-import Icon from "../assets/icon.png";
 import FlipCard from 'react-native-flip-card';
 
 function CardFlip() {
@@ -15,7 +14,7 @@ function CardFlip() {
         >
             {/* Front Side */}
             <View style={styles.front}>
-                <Image source={Icon} style={styles.cardImage}/>
+                
 
                 <View style={styles.cardText}>
                     <Text style={styles.name}>
