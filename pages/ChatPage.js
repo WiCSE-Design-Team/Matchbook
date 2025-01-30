@@ -3,10 +3,10 @@ import * as React from 'react';
 import { ScrollView, Image, View, Text, StyleSheet, SafeAreaView, Dimensions } from 'react-native';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
+import { chatPage } from '../styling';
 
 
-
-function MessagesPage() {
+function ChatPage() {
     const [chats, setChats] = useState([
         {
             name : "Paige",
@@ -35,18 +35,18 @@ function MessagesPage() {
 
         if(chats){
             return(
-                <ScrollView style={styles.chats}>
+                <ScrollView style={chatPage.chats}>
                     {chats.map((chat, id)=> {
                         console.log(chat.name);
                         return(
-                            <View key={id} style={styles.chat} onClick={openChat(id)}>
-                                <View style={styles.user}>
+                            <View key={id} style={chatPage.chat} onClick={openChat(id)}>
+                                <View style={chatPage.user}>
                                     <FontAwesome6 name="user" size={25} color="black"/>
                                 </View>
                                 
-                                <Text style={styles.name}>{chat.name}</Text>
-                                <View style={styles.arrow}>
-                                    <FontAwesome6 name="greater-than" size={25} color="black" style={styles.icon} />
+                                <Text style={chatPage.name}>{chat.name}</Text>
+                                <View style={chatPage.arrow}>
+                                    <FontAwesome6 name="greater-than" size={25} color="black" style={chatPage.icon} />
                                 </View>
                             </View>
                         )
@@ -63,8 +63,8 @@ function MessagesPage() {
 
 
     return (
-        <View style={styles.container}>
-            <View style={styles.header}>
+        <View style={chatPage.container}>
+            <View style={chatPage.header}>
                 <Text style={{paddingTop:'8%', fontWeight:'700', color: 'white'}}>Chats</Text>
             </View>
             <LoadChats/>
@@ -75,54 +75,5 @@ function MessagesPage() {
 //width, height
 
 const dimScreen= Dimensions.get("screen");
-const styles = StyleSheet.create({
-    container : {
-        alignItems: 'center', justifyContent: 'top',
-        height: '100%',
-        display: 'flex',
-        flexDirection:'column',
-    },
-    header : {
-        display: 'flex',
-        alignItems: 'center', 
-        justifyContent: 'center',
-        height: '12%',
-        width: '100%',
-        backgroundColor: '#818589',
-    },
-    chats : {
-        height: '88%',
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    chat : {
-        width: '100%',
-        flexShrink: 1,
-        padding: 10,
-        flexDirection: 'row',
-        backgroundColor: 'white',
-        borderBlockColor:'black',
-        borderTopWidth: 0,
-        borderWidth: 0.5,
-        alignItems: 'center',
-    },
-    user : {
-        borderRadius: '50%',
-        width: 50,
-        height: 50,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent:'center',
-        paddingLeft: 1,
-        backgroundColor: '#818589',
-    },
-    name : {
-        paddingLeft: 10,
-    },
-    arrow: {
-        paddingLeft: '68%',
-    }
-});
 
-export default MessagesPage;
+export default ChatPage;

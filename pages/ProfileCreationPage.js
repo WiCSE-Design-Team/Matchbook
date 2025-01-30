@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { View, TextInput, SafeAreaView, StyleSheet, KeyboardAvoidingView, Button } from 'react-native';
+import { View, TextInput, SafeAreaView, KeyboardAvoidingView, Button } from 'react-native';
 
-function ProfileCreation() {
+import { profileCreationPage } from '../styling';
+
+function ProfileCreationPage() {
     const [firstName, setFirstName] = React.useState('');
     const firstNameRef = React.useRef(null);
     const [lastName, setLastName] = React.useState('');
@@ -22,11 +24,11 @@ function ProfileCreation() {
     }
 
     return (
-        <SafeAreaView style={styles.fullScreen}>
+        <SafeAreaView style={profileCreationPage.fullScreen}>
             <KeyboardAvoidingView behavior='padding'>
                 <View>
                     <TextInput
-                        style={styles.input}
+                        style={profileCreationPage.input}
                         onChangeText = {setFirstName}
                         placeholder='First Name'
                         value = {firstName}
@@ -35,7 +37,7 @@ function ProfileCreation() {
                         onSubmitEditing={() => lastNameRef.current.focus()}
                     />
                     <TextInput
-                        style={styles.input}
+                        style={profileCreationPage.input}
                         onChangeText = {setLastName}
                         placeholder='Last Name'
                         value = {lastName}
@@ -44,7 +46,7 @@ function ProfileCreation() {
                         onSubmitEditing={() => ageRef.current.focus()}
                     />
                     <TextInput
-                        style={styles.input}
+                        style={profileCreationPage.input}
                         onChangeText = {setAge}
                         placeholder='Age'
                         value = {age}
@@ -53,7 +55,7 @@ function ProfileCreation() {
                         onSubmitEditing={() => universityRef.current.focus()}
                     />
                     <TextInput
-                        style={styles.input}
+                        style={profileCreationPage.input}
                         onChangeText = {setUniversity}
                         placeholder='University'
                         value = {university}
@@ -62,7 +64,7 @@ function ProfileCreation() {
                         onSubmitEditing={() => courseRef.current.focus()}
                     />
                     <TextInput
-                        style={styles.input}
+                        style={profileCreationPage.input}
                         onChangeText = {setCourse}
                         placeholder='Course'
                         value = {course}
@@ -71,7 +73,7 @@ function ProfileCreation() {
                         onSubmitEditing={() => yearRef.current.focus()}
                     />
                     <TextInput
-                        style={styles.input}
+                        style={profileCreationPage.input}
                         onChangeText = {setYear}
                         placeholder='Academic Year'
                         value = {year}
@@ -80,7 +82,7 @@ function ProfileCreation() {
                         onSubmitEditing={() => libraryRef.current.focus()}
                     />
                     <TextInput
-                        style={styles.input}
+                        style={profileCreationPage.input}
                         onChangeText = {setLibrary}
                         placeholder='Favorite Library'
                         value = {library}
@@ -88,7 +90,7 @@ function ProfileCreation() {
                         returnKeyType="done"
                     />
 
-                    <View style = {styles.butn}>
+                    <View style = {profileCreationPage.butn}>
                         <Button 
                             title='Create Profile'
                             color="#FE8C46"
@@ -101,30 +103,4 @@ function ProfileCreation() {
     )
 }
 
-export default ProfileCreation;
-
-const styles = StyleSheet.create({
-    fullScreen: {
-        alignItems: 'center', justifyContent: 'center',
-        height: '100%'
-    },
-    input: {
-        height: 40,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-        backgroundColor: 'FEBC46',
-        color: '#000000',
-        borderRadius: 20,
-        borderColor: '#C5C6C7',
-        width: 200,
-    },
-    butn: {
-        borderRadius: 17,
-        borderColor: '#C5C6C7',
-        alignItems: 'center',
-        width: 200,
-        borderWidth: 1,
-        marginTop: 20,
-    },
-})
+export default ProfileCreationPage;

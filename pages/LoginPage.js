@@ -1,10 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
-import { View, Text, Button, TextInput, StyleSheet, Image, BackHandler } from 'react-native';
+import { View, Text, Button, TextInput, Image, BackHandler } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { FIREBASE_AUTH } from '../FirebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
 
 import logo from '../assets/images/logo.png';
+import { loginPage } from '../styling';
 
 // this is also the landing page
 function LoginPage() {
@@ -38,94 +40,47 @@ function LoginPage() {
     }
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Image source={logo} style={styles.image} />
-            <Text style={styles.title}>Matchbook</Text>
-            <Text style={styles.subtitle}>Find your study match!</Text>
-            <TextInput
-                style={styles.input}
-                onChangeText = {setEmail}
-                placeholder='Email'
-                value = {email}
-            />
-            <TextInput
-                secureTextEntry
-                style={styles.input}
-                onChangeText = {setPass}
-                placeholder='Password'
-                value = {password}
-            />
-
-            
-            <View style = {styles.butnlog}>
-                <Button 
-                    title='Login'
-                    color="#FE8C46"
-                    onPress = {signIn}
-                />
+        <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={loginPage.upper}>
+                <Image source={logo} style={loginPage.image} />
+                <Text style={loginPage.title}>Matchbook</Text>
+                <Text style={loginPage.subtitle}>FIND YOUR STUDY MATCH</Text>
             </View>
-            <View style = {styles.butnsign}>
-                <Button 
-                    title='Sign Up'
-                    color="#FE8C46"
-                    onPress = {signUp}
-                /></View>
 
-        </View>
+            <View style={loginPage.lower}>
+                <Text style={loginPage.subtitle}> Welcome! </Text>
+                <TextInput
+                    style={loginPage.input}
+                    onChangeText = {setEmail}
+                    placeholder='Email'
+                    value = {email}
+                />
+                <TextInput
+                    secureTextEntry
+                    style={loginPage.input}
+                    onChangeText = {setPass}
+                    placeholder='Password'
+                    value = {password}
+                />
+
+                
+                <View style = {loginPage.butnlog}>
+                    <Button 
+                        title='Login'
+                        color="#FE8C46"
+                        onPress = {signIn}
+                    />
+                </View>
+                <View style = {loginPage.butnsign}>
+                    <Button 
+                        title='Sign Up'
+                        color="#FE8C46"
+                        onPress = {signUp}
+                    />
+                </View>
+            </View>
+        </SafeAreaView>
     );
 }
-
-const styles = StyleSheet.create({
-
-    input: {
-      height: 40,
-      margin: 12,
-      borderWidth: 1,
-      padding: 10,
-      backgroundColor: 'FEBC46',
-      color: '#000000',
-      borderRadius: 20,
-      borderColor: '#C5C6C7',
-      width: 200,
-    },
-    title: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        color: '#FE4D55',
-        marginBottom: 10,
-        fontFamily: 'BaksoSapi'
-    },
-    subtitle: {
-        fontSize: 10,
-        color: '#FE4D55',
-        marginBottom: 20,
-        fontWeight: 'bold',
-
-    },
-    butnlog: {
-        borderRadius: 17,
-        borderColor: '#C5C6C7',
-        alignItems: 'center',
-        width: 200,
-        borderWidth: 1,
-        marginTop: 20,
-    
-        
-    },
-    butnsign: {
-        borderRadius: 17,
-        borderColor: '#C5C6C7',
-        alignItems: 'center',
-        width: 200,
-        borderWidth: 1,
-        marginTop: 40,
-        
-    },
-    image: {
-        width: 200,
-        height: 200,
-    }
-
-  });
 
 export default LoginPage;

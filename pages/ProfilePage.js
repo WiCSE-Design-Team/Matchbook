@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { View, Text, Image, ImageBackground } from 'react-native';
 
+import { profilePage } from '../styling';
+
 function ProfilePage() {
     return (
         <View style={{ flex: 1, alignItems: 'right', justifyContent: 'center'}}>
