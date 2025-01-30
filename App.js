@@ -6,6 +6,8 @@ import AppLoading from 'expo-app-loading';
 
 // screens
 import LoginPage from './pages/LoginPage'; // no bottom tab nav
+import SignUpPage from './pages/SignUpPage'; // no bottom tab nav
+import ProfileCreationPage from './pages/ProfileCreationPage';
 import TabNav from './components/TabNav'; // page for tab nav
 
 const fonts = {
@@ -25,8 +27,10 @@ function App() {
   
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Landing" component={LoginPage} options={{ headerShown: false }}/>
+      <Stack.Navigator initialRouteName='Login'>
+        <Stack.Screen name="Login" component={LoginPage} options={{ headerShown: false }}/>
+        <Stack.Screen name="SignUp" component={SignUpPage} options={{ headerShown: false, gestureEnabled: false }} />
+        <Stack.Screen name="ProfileCreation" component={ProfileCreationPage} options={{ headerShown: false }}/> 
         <Stack.Screen name="TabNav" component={TabNav} options={{ headerShown: false, /*gestureEnabled: false*/ }}/>
       </Stack.Navigator>
     </NavigationContainer>

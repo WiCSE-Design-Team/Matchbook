@@ -8,11 +8,12 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword} from "fireb
 import logo from '../assets/images/logo.png';
 import { loginPage } from '../styling';
 
-// this is also the landing page
-function LoginPage() {
+function SignUpPage() {
     const navigation = useNavigation();
     const [email, setEmail] = React.useState('');
     const [password, setPass] = React.useState('');
+    const [confirmPassword, setConfirmPass] = React.useState('');
+
     const auth = FIREBASE_AUTH;
 
     const signIn = async () => {
@@ -27,6 +28,7 @@ function LoginPage() {
         }
         
     }
+
     const signUp = async () => {
         try{
             const response = await createUserWithEmailAndPassword(auth, email, password);
@@ -62,25 +64,29 @@ function LoginPage() {
                     placeholder='Password'
                     value = {password}
                 />
+                {/* feel free to delete the confirm password, just thought it would be a cool feature if possible */}
+                <TextInput
+                    secureTextEntry
+                    style={loginPage.input}
+                    onChangeText = {setConfirmPass}
+                    placeholder='Confirm Password'
+                    value = {confirmPassword}
+                />
 
-                
-                <View style = {loginPage.butnlog}>
-                    <Button 
-                        title='Login'
-                        color="#FE8C46"
-                        onPress = {signIn}
-                    />
-                </View>
                 <View style = {loginPage.butnsign}>
                     <Button 
                         title='Sign Up'
                         color="#FE8C46"
-                        onPress = {() => navigation.navigate('SignUp')}
+                        onPress = {signUp} // need to navigate to profile creation page after sign up
                     />
                 </View>
+
+                <Text onPress={() => navigation.navigate('Login')}>
+                    back to login
+                </Text>
             </View>
         </SafeAreaView>
     );
 }
 
-export default LoginPage;
+export default SignUpPage;

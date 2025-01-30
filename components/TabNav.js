@@ -15,7 +15,6 @@ function TabNav() {
             <Tab.Screen name='Profile' component={ProfilePage} options={{ headerShown: false}} />
             <Tab.Screen name='Matching' component={MatchingPage} options={{ headerShown: false}} />
             <Tab.Screen name='Messages' component={ChatPage} options={{ headerShown: false}} />
-            <Tab.Screen name='Create' component={ProfileCreationPage} options={{headerShown: false}} />
         </Tab.Navigator>
     )
 }
