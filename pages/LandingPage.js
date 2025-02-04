@@ -1,8 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
-import { View, Text, Button, TextInput, StyleSheet, Image, BackHandler } from 'react-native';
+import { View, Text, Button, TextInput, StyleSheet, Image, BackHandler, TouchableOpacity } from 'react-native';
 import { FIREBASE_AUTH } from '../FirebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
+import { useFonts } from "expo-font"; 
+
+
 
 // this is also the login page
 function LandingPage() {
@@ -10,6 +13,11 @@ function LandingPage() {
     const [email, setEmail] = React.useState('');
     const [password, setPass] = React.useState('');
     const auth = FIREBASE_AUTH;
+
+    const [fontsLoaded] = useFonts({
+        "BaksoSapi": require("../assets/fonts/BaksoSapi.otf"),
+        "Karla": require("../assets/fonts/Karla-VariableFont_wght.ttf")
+      });
 
     const signIn = async () => {
         try{
@@ -36,89 +44,144 @@ function LandingPage() {
     }
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={styles.container}>
         
-            <Text style={styles.title}>Matchbook</Text>
-            <Text style={styles.subtitle}>Find your study match!</Text>
+        <View style={styles.pinkBackground} />  // pink background
+        
+        <Image source={require("../assets/Logo.png")} style={styles.icon} />    // logo
+        <Text style={styles.title}>Matchbook</Text>
+        <Text style={styles.subtitle}>FIND YOUR STUDY MATCH</Text>
+        <Text style={styles.welcome}>Welcome! Sign In Here</Text>
+
+
+        
+        <View style={styles.inputContainer}>
             <TextInput
                 style={styles.input}
                 onChangeText = {setEmail}
                 placeholder='Email'
+                placeholderTextColor='#F99D90'
                 value = {email}
             />
+            </View>
+        
+            <View style={styles.inputContainer}>
             <TextInput
                 secureTextEntry
                 style={styles.input}
                 onChangeText = {setPass}
                 placeholder='Password'
+                placeholderTextColor='#F99D90'
                 value = {password}
             />
+            </View>
 
             
-            <View style = {styles.butnlog}>
-                <Button 
-                    title='Login'
-                    color="#FE8C46"
-                    onPress = {signIn}
-                />
-            </View>
-            <View style = {styles.butnsign}>
-                <Button 
-                    title='Sign Up'
-                    color="#FE8C46"
-                    onPress = {signUp}
-                /></View>
+            // changed buttons to Opacity 
+            <TouchableOpacity style={styles.butnlog} onPress={signIn}>
+                <Text style={styles.butnText}>Login</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.butnsign} onPress={signUp}>
+                <Text style={styles.butnText}>Sign Up</Text>
+            </TouchableOpacity>
+
 
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,  
+        alignItems: 'center', 
+        justifyContent: 'center',
+        backgroundColor: "white",  
+        position: "relative",  
+    },
+    icon: {
+        width: 200, 
+        height: 200,
+        marginBottom: 30,
+        resizeMode: "contain",
+    },
 
     input: {
-      height: 40,
-      margin: 12,
-      borderWidth: 1,
-      padding: 10,
-      backgroundColor: 'FEBC46',
-      color: '#000000',
-      borderRadius: 20,
-      borderColor: '#C5C6C7',
-      width: 200,
+      flex: 1,
+      color: '#9E122C',
+      height: '100%',
+      fontSize: 13,
+    },
+
+    pinkBackground: {
+        position: 'absolute',
+        bottom: -150,
+        width: '300%',
+        height: 570,
+        backgroundColor: '#FCE8E5',
+        borderBottomLeftRadius: 200,
+        borderBottomRightRadius: 300,
+        
+    },
+    inputContainer: {
+        backgroundColor: 'white',
+        borderRadius: 25,
+        paddingHorizontal: 15,
+        width: 300,
+        height: 50,
+        marginBottom: 15,
     },
     title: {
-        fontSize: 30,
+        fontSize: 39,
         fontWeight: 'bold',
-        color: '#FE4D55',
-        marginBottom: 10,
+        color: '#9E122C',
+        marginBottom: 5,
+        fontFamily: 'BaksoSapi',
 
     },
     subtitle: {
-        fontSize: 10,
-        color: '#FE4D55',
-        marginBottom: 20,
+        fontSize: 15,
+        color: '#9E122C',
+        marginBottom: 60,
+        marginTop: 10,
         fontWeight: 'bold',
+        fontFamily: 'Karla',
 
     },
+
+    welcome: {
+        fontSize: 15,
+        color: '#9E122C',
+        marginTop: 20,
+        marginBottom: 30,
+        fontWeight: 'bold',
+        fontFamily: 'Karla',
+    },
     butnlog: {
-        borderRadius: 17,
-        borderColor: '#C5C6C7',
+        borderRadius: 35,
+        backgroundColor: '#9E122C',
         alignItems: 'center',
-        width: 200,
-        borderWidth: 1,
+        width: 300,
+        padding: 15,
         marginTop: 20,
     
         
     },
     butnsign: {
-        borderRadius: 17,
-        borderColor: '#C5C6C7',
+        borderRadius: 35,
+        backgroundColor: '#9E122C',
         alignItems: 'center',
-        width: 200,
-        borderWidth: 1,
-        marginTop: 40,
-        
+        width: 300,
+        padding: 15,
+        marginTop: 20,
     },
+    butnText: {
+        fontSize: 13,
+        fontFamily: 'Karla',
+        fontWeight: 'bold',
+        color: 'white',
+    },
+    
 
   });
 
