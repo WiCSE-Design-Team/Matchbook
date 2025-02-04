@@ -3,6 +3,8 @@ import {View, Text, Image, ImageBackground, ScrollView, StyleSheet} from 'react-
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 
+import { profilePage } from '../styling';
+
 function ProfilePage() {
 
     return (
