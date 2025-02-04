@@ -1,39 +1,129 @@
 import * as React from 'react';
-import { View, Text, Image, ImageBackground } from 'react-native';
+import {View, Text, Image, ImageBackground, ScrollView, StyleSheet} from 'react-native';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 
 function ProfilePage() {
+
     return (
-        <View style={{ flex: 1, alignItems: 'right', justifyContent: 'center'}}>
-            <Image 
-            source={{uri: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'}}
-                style={{ width: 400, height:300,position: 'absolute', top: 50 }}
-                />
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{
+                width: '100%',   
+                height: 450, 
+                backgroundColor: '#FBCB77',
+                position: 'absolute',
+                top: 0,    
+                justifyContent: 'center',
+                alignItems: 'center'      
+            }} />
+
+                <View style={{
+                width: '90%',   
+                height: 275, 
+                backgroundColor: '#FFFFC5',
+                position: 'absolute',
+                borderRadius: 20, 
+                top: 60,       
+                }} />
+
+                <Text style={{
+                fontSize: 15,
+                fontFamily: 'times new roman',
+                top: 175, 
+                position: 'absolute'
+                }}>profile picture here</Text>
             
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ marginLeft: 20, marginTop: 20, fontSize: 25}}>Name</Text>
-                    <Image 
-                        source={{uri: 'https://cdn.iconscout.com/icon/free/png-256/free-edit-icon-download-in-svg-png-gif-file-formats--pen-write-pencil-ball-study-user-interface-vol-2-pack-icons-2202989.png?f=webp&w=256'}} 
-                        style={{ width: 20, height: 20, marginLeft: 7, marginTop: 20 }} 
-                    />
-                    <Image 
-                        source={{uri: 'https://e7.pngegg.com/pngimages/257/93/png-clipart-settings-gear-icon-gear-configuration-thumbnail.png'}} 
-                        style={{ width: 20, height: 20, marginLeft: 240, marginTop: 20 }} 
-                    />
+            <View style={{
+                    backgroundColor: 'white' ,
+                    width: '100%', 
+                    bottom: 0, 
+                    height: 425, 
+                    position: 'absolute', 
+                    borderRadius: 30
+                }}>
+
+            <Text style={{
+                fontSize: 30, 
+                fontFamily: 'times new roman', 
+                color: '#9E122C', 
+                position: 'absolute', 
+                top: 10, 
+                left: 20
+            }}> Name, Age </Text>
+
+            <Text style={{
+                fontSize: 18,
+                fontFamily: 'times new roman', 
+                color: '#F99D90', 
+                position: 'absolute', 
+                top: 18, 
+                right: 150
+            }}> pronouns </Text>
+
+            <SimpleLineIcons name="settings" size={22} color="#9E122C" 
+                style={{
+                    position: 'absolute', 
+                    top: 18,
+                    right: 20
+                    }} />
+
+            <Text style={{
+                position: 'absolute', 
+                fontFamily: 'times new roman', 
+                fontSize: 18, 
+                top: 50, 
+                left: 20
+                }}> Introduction or bio! </Text>
+            
+            <View style={[styles.courseContainer, {top: 75}]}>
+                <View style={styles.container}>
+                    <Text style={styles.text}>course name</Text>
+                </View>
+                <View style={styles.container}>
+                    <Text style={styles.text}>course name</Text>
+                </View>
             </View>
-            <Text style={{marginLeft: 20, marginBottom: 10, marginTop: 5}}>bio</Text>
-            <Text style={{marginLeft: 20,}}>course name    course name</Text>
 
-            <ImageBackground
-                source={{uri: 'https://preview.colorkit.co/color/d9d9d9.png?size=social&type=opengraph'}}
-                style={{ width: 350, height: 300, position: 'absolute', top: 475, marginLeft: 22, alignItems: 'center', justifyContent: 'center'}}
+                <ScrollView> 
+                <View style = {{top: 90, width: '100%', paddingLeft: 20}}>
+                    <Text style={{marginBottom: 20, textAlign: "center", width: '100%'}}>More Profile Info</Text>
+        
+                    <Text>Education:</Text>
+                        <Text style={{marginLeft: 20}}>School:</Text>
+                        <Text style={{marginLeft: 20}}>Academic Year:</Text>
+                        <Text style={{marginLeft: 20}}>Major:</Text>
+                        <Text style={{marginLeft: 20}}>Minors:</Text>
+                        <Text style={{marginLeft: 20, marginBottom: 20}}>Professors:</Text>
 
-            >
-                <Text style={{top: -125}}> more profile info</Text>
-            </ImageBackground>
-
+                    <Text>Preferences:</Text>
+                        <Text style={{marginLeft: 20}}>Study Style:</Text>
+                        <Text style={{marginLeft: 20}}>Favorite Library:</Text>
+                </View>
+                </ScrollView>
+            </View>
             
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    courseContainer: {
+        flexDirection: 'row',
+    }, 
+    container: {
+      width: 97, 
+      height: 30,
+      borderRadius: 20,
+      borderWidth: 2,
+      borderColor: 'black',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginLeft: 20,  
+    },
+    text: {
+      fontSize: 12,
+      color: 'black',
+    },
+  });
 
 export default ProfilePage;
