@@ -52,8 +52,8 @@ const styles = StyleSheet.create({
       margin: 12,
       borderWidth: 1,
       padding: 10,
-      backgroundColor: 'FEBC46',
-      color: '#FFFFFF',
+      backgroundColor: '#F2F2F2',
+      color: '#00000',
       borderRadius: 20,
       borderColor: '#C5C6C7',
       width: 200,
@@ -79,7 +79,6 @@ const styles = StyleSheet.create({
         width: 200,
         borderWidth: 1,
         marginTop: 20,
-    
         
     },
     butnsign: {
