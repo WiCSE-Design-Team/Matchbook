@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { MultiSelect } from 'react-native-element-dropdown';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
@@ -20,25 +20,30 @@ const MultiSelectComponent = () => {
     <View style={multiselect.container}>
       <MultiSelect
         style={multiselect.dropdown}
-        placeholderStyle={multiselect.placeholderStyle}
-        selectedTextStyle={multiselect.selectedTextStyle}
-        itemTextStyle={multiselect.itemTextStyle}
-        inputSearchStyle={multiselect.inputSearchStyle}
-        iconStyle={multiselect.iconStyle}
+        placeholderStyle={multiselect.placeholder}
+        selectedTextStyle={multiselect.selectedText}
+        itemTextStyle={multiselect.itemText}
+        inputSearchStyle={multiselect.inputSearch}
+        iconStyle={multiselect.icon}
+        containerStyle={multiselect.list}
+        maxHeight={200}
+        iconColor='white'
         search
         data={data}
         labelField="label"
         valueField="value"
         placeholder="Select Course"
         searchPlaceholder="Search..."
+        alwaysRenderSelectedItem
+        maxSelect={3}
         value={selected}
         onChange={item => {
           setSelected(item);
         }}
         renderLeftIcon={() => (
-            <FontAwesome6 name="filter" size={22} color="black" style={multiselect.icon} />
+            <FontAwesome6 name="filter" size={22} color="white" style={multiselect.icon} />
         )}
-        selectedStyle={multiselect.selectedStyle}
+        selectedStyle={multiselect.selected}
       />
     </View>
   );

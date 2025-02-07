@@ -66,8 +66,10 @@ export const loginPage = StyleSheet.create({
 
 export const matchingPage = StyleSheet.create({
     fullScreen: {
+        flex: 1,
         alignItems: 'center', justifyContent: 'top',
-        height: '100%'
+        height: '100%',
+        backgroundColor: '#FDE6E3',        
     },
     multiselect: {
         width: '90%',
@@ -86,14 +88,21 @@ export const matchingPage = StyleSheet.create({
         width: '90%',
         flexDirection: 'row', justifyContent: 'space-between',
     },
-    button: {
+    passButton: {
         width: '45%',
-        borderColor: 'black', borderWidth: '1',
+        borderColor: '#9E122C', borderWidth: '2', borderRadius: 50,
         marginTop: 20, marginBottom: 10, padding: 10,
-        alignContent: 'center', justifyContent: 'center'
+        alignContent: 'center', justifyContent: 'center',
+    },
+    matchButton: {
+        width: '45%',
+        borderColor: '#9E122C', borderWidth: '2', borderRadius: 50,
+        marginTop: 20, marginBottom: 10, padding: 10,
+        alignContent: 'center', justifyContent: 'center',
     },
     buttonText: {
         textAlign: 'center',
+        fontFamily: 'Karla-Bold', fontSize: 18,
     }
 })
 
@@ -180,80 +189,131 @@ export const profilePage = StyleSheet.create({
 export const cardFlip = StyleSheet.create ({
     front: {
         height: '100%',
-        borderColor: 'black', borderWidth: '1', borderRadius: '10',
-        backgroundColor: 'white'
+        borderRadius: 20,
+        backgroundColor: '#FBCB77'
     },
     back: {
         height: '100%',
-        borderColor: 'black', borderWidth: '1', borderRadius: '10',
+        borderRadius: 20,
         backgroundColor: 'white'
     },
-    cardImage: { 
+    image: { 
         width: '100%', height: '50%',
         borderTopLeftRadius: '10', borderTopRightRadius: '10'
     },
-    cardText: { 
-        width: '100%', height: '35%',
+    profile: { 
+        width: '100%', height: '50%',
         padding: 20,
-        alignContent: 'left'
+        alignContent: 'left',
+        borderRadius: 20,
+        backgroundColor: 'white'
     },
-    name: { 
-        fontSize: '24',
-        fontWeight: 'bold',
-        marginBottom: 5
+    intro: {
+        flexDirection: 'row',
+        marginBottom: 10, paddingTop: 5, paddingBottom: 5,
+    },
+    name: {
+        fontFamily: 'BaksoSapi', fontSize: 24, color: '#9E122C',
+    },
+    age: { 
+        fontFamily: 'BaksoSapi', fontSize: 24, color: '#9E122C',
+        marginLeft: 5, 
+    },
+    pronouns: {
+        fontFamily: 'Karla', fontSize: 14, color: '#F99D90',
+        marginLeft: 10,
+    },
+    university: {
+        flexDirection: "row", alignContent: "center", gap: 10,
+        marginBottom: 30,
+    },
+    universityText: {
+        fontFamily: 'Karla', fontSize: 14,
     },
     bio: { 
-        fontSize: '18'
+        flex: 1,
+        fontFamily: 'Karla', fontSize: 14,
 
     },
-    moreInfo: {
-        height: '50%',
-        padding: 20,
+    tags: {
+        width: '100%',
         alignItems: 'center', justifyContent: 'left',
-    },
-    cardTags: {
-        width: '100%', height: '15%',
-        alignItems: 'center', justifyContent: 'left',
-        marginBottom: 20, padding: 20,
         flexDirection: 'row', gap: 15
     },
     tag: {
-        borderColor: 'black', borderWidth: '1',
+        borderRadius: 50, borderColor: '#9E122C', borderWidth: 1,
         padding: 10,
-        justifyContent: 'center', alignContent: 'center'
+        justifyContent: 'center', alignContent: 'center',
     },
+    tagText: {
+        fontFamily: 'Karla', fontSize: 14, color: '#9E122C',
+    },
+    
+    about: {
+        height: '50%',
+        paddingTop: 20, paddingBottom: 20,
+    },
+    aboutRow: {
+        flexDirection:'row', justifyContent: "space-between"
+    },
+    rowL: {
+        textAlign: 'left',
+        fontFamily: 'Karla', fontSize: 14, color: '#FBCB77',
+        paddingBottom: 10
+    },
+    rowR: {
+        textAlign: 'right',
+        fontFamily: 'Karla', fontSize: 14,
+        paddingBottom: 10
+    },
+    prompts: {
+        borderRadius: 20, borderColor: '#FBCB77', borderWidth: 1,
+        marginTop: 10, marginBottom: 10, padding: 20,
+    },
+    prompt: {
+        fontFamily: 'BaksoSapi', fontSize: 12, color: '#FBCB77',
+        paddingBottom: 10
+    },
+    response: {
+        fontFamily: 'Karla', fontSize: 20
+    }
 })
 
 export const multiselect = StyleSheet.create({
     dropdown: {
         height: 50, width: 200,
-        backgroundColor: 'transparent',
-        borderColor: 'black', borderWidth: '1',
-        padding: 10
+        backgroundColor: '#9E122C',
+        borderRadius: 30,
+        padding: 15, marginTop: 10, marginBottom: 10
     },
 
-    placeholderStyle: {
+    placeholder: {
+        fontFamily: 'Karla', fontSize: 12, color: 'white'
+    },
+    selectedText: {
+        fontFamily: 'Karla', fontSize: 12, color: '#9E122C'
+    },
+    itemText:{
         fontSize: 12,
     },
-    selectedTextStyle: {
-        fontSize: 12,
-    },
-    itemTextStyle:{
-        fontSize: 12,
-    },
-    iconStyle: {
+    icon: {
         width: 20,
         height: 20,
     },
-    inputSearchStyle: {
+    inputSearch: {
         height: 30,
-        fontSize: 12,
+        borderRadius: 50,
+        fontFamily: 'Karla', fontSize: 12,
     },
     icon: {
         marginRight: 10,
     },
-    selectedStyle: {
-        borderRadius: 12,
+    selected: {
+        borderRadius: 50, borderColor: '#9E122C',
+        gap: 10,
     },
+    list: {
+        borderRadius: 15
+    }
 });
 
