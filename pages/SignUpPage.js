@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import { View, Text, Button, TextInput, Image, BackHandler } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { FIREBASE_AUTH } from '../FirebaseConfig';
+import { FIREBASE_AUTH, FIREBASE_DB } from '../FirebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
 
 import logo from '../assets/images/logo.png';
@@ -16,10 +16,45 @@ function SignUpPage() {
 
     const auth = FIREBASE_AUTH;
 
+    const addUserDB = async(response)=>{
+        //add user to db
+        try{
+
+            //create document (basically row in db table/collection) reference
+            const docRef = doc(FIREBASE_DB, "UserInfo", response.user.uid);
+
+            //set the details of the doc - these are just standins for actual data!
+            const docRes = await setDoc(docRef, {
+                first_name: 'test-first-name', 
+                last_name: 'test-last-name',
+                pronouns: 'she/her',
+                age: '21',
+                school: 'University of Florida',
+                pronouns: 'she/her',
+                major: 'Computer Science',
+                study_style: 'Solitary', 
+                favSpot: 'Library West', 
+                leastSpot: 'Marston', 
+                imgUrl: 'url',
+                want: [],
+                matches: [],
+            });
+
+            console.log(docRes);
+
+        } catch(e){
+            console.log(e);
+        }
+        
+    }
+
     const signIn = async () => {
         try{
             const response = await signInWithEmailAndPassword(auth, email, password);
-            console.log(response);
+            console.log(response.user.uid);
+
+            addUserDB(response);
+
             alert("Sign in successful.");
             navigation.navigate('TabNav');
         } catch (error) {
@@ -32,7 +67,10 @@ function SignUpPage() {
     const signUp = async () => {
         try{
             const response = await createUserWithEmailAndPassword(auth, email, password);
-            console.log(response);
+
+            //add user to db if not in it
+            addUserDB(response);
+            
             alert("Sign up successful.");
             navigation.navigate('TabNav');
         } catch (error) {
