@@ -4,6 +4,7 @@ import { View, Text, Button, TextInput, StyleSheet, Image, BackHandler, Touchabl
 import { FIREBASE_AUTH } from '../FirebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
 import { useFonts } from "expo-font"; 
+import { Ionicons } from "@expo/vector-icons";
 
 
 
@@ -56,6 +57,7 @@ function LandingPage() {
 
         
         <View style={styles.inputContainer}>
+        <Ionicons name="mail" size={20} color="#9E5A57" style={styles.iconStyle} />
             <TextInput
                 style={styles.input}
                 onChangeText = {setEmail}
@@ -66,6 +68,7 @@ function LandingPage() {
             </View>
         
             <View style={styles.inputContainer}>
+            <Ionicons name="lock-closed" size={20} color="#9E5A57" style={styles.iconStyle} />
             <TextInput
                 secureTextEntry
                 style={styles.input}
@@ -81,6 +84,8 @@ function LandingPage() {
             <TouchableOpacity style={styles.butnlog} onPress={signIn}>
                 <Text style={styles.butnText}>Login</Text>
             </TouchableOpacity>
+
+            <Text style={styles.orText}>or</Text>
 
             <TouchableOpacity style={styles.butnsign} onPress={signUp}>
                 <Text style={styles.butnText}>Sign Up</Text>
@@ -100,9 +105,9 @@ const styles = StyleSheet.create({
         position: "relative",  
     },
     icon: {
-        width: 200, 
+        width: 180, 
         height: 200,
-        marginBottom: 30,
+        marginBottom: 10,
         resizeMode: "contain",
     },
 
@@ -115,21 +120,26 @@ const styles = StyleSheet.create({
 
     pinkBackground: {
         position: 'absolute',
-        bottom: -150,
-        width: '300%',
-        height: 570,
+        bottom: 0,
+        width: '100%',
+        height: 460,
         backgroundColor: '#FCE8E5',
-        borderBottomLeftRadius: 200,
-        borderBottomRightRadius: 300,
+        borderTopLeftRadius: 120,
+        borderTopRightRadius: 120,
         
     },
     inputContainer: {
+        flexDirection: "row",
         backgroundColor: 'white',
         borderRadius: 25,
         paddingHorizontal: 15,
         width: 300,
         height: 50,
-        marginBottom: 15,
+        marginBottom: 30,
+    },
+    iconStyle: {
+        marginRight: 10, 
+        marginTop: 14,
     },
     title: {
         fontSize: 39,
@@ -163,7 +173,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 300,
         padding: 15,
-        marginTop: 20,
+        marginTop: 10,
     
         
     },
@@ -181,6 +191,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'white',
     },
+    orText: {
+        fontSize: 15,
+        color: '#9E122C',
+        marginTop: 18,
+        marginBottom: 0,
+        fontWeight: 'bold',
+        fontFamily: 'Karla',
+    }
     
 
   });
