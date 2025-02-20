@@ -1,9 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
-import { View, Text, Button, TextInput, Image, BackHandler } from 'react-native';
+import { View, Text, Button, TextInput, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FIREBASE_AUTH, FIREBASE_DB } from '../FirebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
+import { Ionicons } from "@expo/vector-icons";
 
 import logo from '../assets/images/logo.png';
 import { loginPage } from '../styling';
@@ -88,39 +89,50 @@ function SignUpPage() {
             </View>
 
             <View style={loginPage.lower}>
-                <Text style={loginPage.subtitle}> Welcome! </Text>
-                <TextInput
-                    style={loginPage.input}
-                    onChangeText = {setEmail}
-                    placeholder='Email'
-                    value = {email}
-                />
-                <TextInput
-                    secureTextEntry
-                    style={loginPage.input}
-                    onChangeText = {setPass}
-                    placeholder='Password'
-                    value = {password}
-                />
-                {/* feel free to delete the confirm password, just thought it would be a cool feature if possible */}
-                <TextInput
-                    secureTextEntry
-                    style={loginPage.input}
-                    onChangeText = {setConfirmPass}
-                    placeholder='Confirm Password'
-                    value = {confirmPassword}
-                />
+                <Text style={loginPage.welcome}> Welcome! Sign Up Here</Text>
 
-                <View style = {loginPage.butnsign}>
-                    <Button 
-                        title='Sign Up'
-                        color="#FE8C46"
-                        onPress = {signUp} // need to navigate to profile creation page after sign up
+                <View style={loginPage.inputContainer}>
+                    <Ionicons name="mail" size={20} color="#9E122C" style={loginPage.iconStyle} />
+                    <TextInput
+                        style={loginPage.input}
+                        onChangeText = {setEmail}
+                        placeholder='Email'
+                        placeholderTextColor='#F99D90'
+                        value = {email}
                     />
                 </View>
 
-                <Text onPress={() => navigation.navigate('Login')}>
-                    back to login
+                <View style={loginPage.inputContainer}>
+                    <Ionicons name="lock-closed" size={20} color="#9E122C" style={loginPage.iconStyle} />
+                    <TextInput
+                        secureTextEntry
+                        style={loginPage.input}
+                        onChangeText = {setPass}
+                        placeholder='Password'
+                        placeholderTextColor='#F99D90'
+                        value = {password}
+                    />
+                </View>
+
+                {/* feel free to delete the confirm password, just thought it would be a cool feature if possible */}
+                <View style={loginPage.inputContainer}>
+                    <Ionicons name="lock-closed" size={20} color="#9E122C" style={loginPage.iconStyle} />
+                    <TextInput
+                        secureTextEntry
+                        style={loginPage.input}
+                        onChangeText = {setConfirmPass}
+                        placeholder='Confirm Password'
+                        placeholderTextColor='#F99D90'
+                        value = {confirmPassword}
+                    />
+                </View>
+
+                <TouchableOpacity style={loginPage.button} onPress = {signUp}>
+                    <Text style={loginPage.buttonText}>Sign Up</Text>
+                </TouchableOpacity>
+
+                <Text style={loginPage.orText} onPress={() => navigation.navigate('Login')}>
+                    Back to Login
                 </Text>
             </View>
         </SafeAreaView>

@@ -1,9 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
-import { View, Text, Button, TextInput, Image, BackHandler } from 'react-native';
+import { View, Text, Button, TextInput, StyleSheet, Image, BackHandler, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FIREBASE_AUTH } from '../FirebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
+import { Ionicons } from "@expo/vector-icons";
 
 import logo from '../assets/images/logo.png';
 import { loginPage } from '../styling';
@@ -48,36 +49,40 @@ function LoginPage() {
             </View>
 
             <View style={loginPage.lower}>
-                <Text style={loginPage.subtitle}> Welcome! </Text>
-                <TextInput
-                    style={loginPage.input}
-                    onChangeText = {setEmail}
-                    placeholder='Email'
-                    value = {email}
-                />
-                <TextInput
-                    secureTextEntry
-                    style={loginPage.input}
-                    onChangeText = {setPass}
-                    placeholder='Password'
-                    value = {password}
-                />
-
+                <Text style={loginPage.welcome}>Welcome! Login In Here</Text>
                 
-                <View style = {loginPage.butnlog}>
-                    <Button 
-                        title='Login'
-                        color="#FE8C46"
-                        onPress = {signIn}
+                <View style={loginPage.inputContainer}>
+                    <Ionicons name="mail" size={20} color="#9E122C" style={loginPage.iconStyle} />
+                    <TextInput
+                        style={loginPage.input}
+                        onChangeText = {setEmail}
+                        placeholder='Email'
+                        placeholderTextColor='#F99D90'
+                        value = {email}
                     />
                 </View>
-                <View style = {loginPage.butnsign}>
-                    <Button 
-                        title='Sign Up'
-                        color="#FE8C46"
-                        onPress = {() => navigation.navigate('SignUp')}
+
+                <View style={loginPage.inputContainer}>
+                    <Ionicons name="lock-closed" size={20} color="#9E122C" style={loginPage.iconStyle} />
+                    <TextInput
+                        secureTextEntry
+                        style={loginPage.input}
+                        onChangeText = {setPass}
+                        placeholder='Password'
+                        placeholderTextColor='#F99D90'
+                        value = {password}
                     />
                 </View>
+
+                <TouchableOpacity style={loginPage.button} onPress={signIn}>
+                    <Text style={loginPage.buttonText}>Login</Text>
+                </TouchableOpacity>
+    
+                <Text style={loginPage.orText}>or</Text>
+    
+                <TouchableOpacity style={loginPage.button} onPress = {() => navigation.navigate('SignUp')}>
+                    <Text style={loginPage.buttonText}>Sign Up</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );

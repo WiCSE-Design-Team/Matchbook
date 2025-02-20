@@ -32,36 +32,57 @@ export const loginPage = StyleSheet.create({
         borderTopLeftRadius: 100,
         borderTopRightRadius: 100,
     },
-    input: {
-        height: 40,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-        backgroundColor: 'FEBC46',
-        color: '#FFFFFF',
-        borderRadius: 20,
-        borderColor: '#C5C6C7',
-        width: 200,
-    },
-    butnlog: {
-        borderRadius: 17,
-        borderColor: '#C5C6C7',
-        alignItems: 'center',
-        width: 200,
-        borderWidth: 1,
+    welcome: {
+        fontSize: 15,
+        color: '#9E122C',
         marginTop: 20,
-    
-        
+        marginBottom: 30,
+        fontWeight: 'bold',
+        fontFamily: 'Karla',
     },
-    butnsign: {
-        borderRadius: 17,
-        borderColor: '#C5C6C7',
+    inputContainer: {
+        flexDirection: "row",
+        backgroundColor: 'white',
+        borderRadius: 25,
+        paddingHorizontal: 15,
+        width: 300,
+        height: 50,
+        marginBottom: 30,
+    },
+    input: {
+        flex: 1,
+        fontFamily: 'Karla',
+        color: '#9E122C',
+        height: '100%',
+        fontSize: 13,
+    },
+    iconStyle: {
+        marginRight: 10, 
+        marginTop: 14,
+    },
+    button: {
+        borderRadius: 35,
+        backgroundColor: '#9E122C',
         alignItems: 'center',
-        width: 200,
-        borderWidth: 1,
-        marginTop: 40,
-        
+        width: 300,
+        padding: 15,
+        margin: 10,
     },
+    buttonText: {
+        fontSize: 13,
+        fontFamily: 'Karla',
+        fontWeight: 'bold',
+        color: 'white',
+    },
+    orText: {
+        fontSize: 15,
+        color: '#9E122C',
+        marginTop: 10,
+        marginBottom: 10,
+        fontWeight: 'bold',
+        fontFamily: 'Karla',
+    }
+
 })
 
 export const matchingPage = StyleSheet.create({
