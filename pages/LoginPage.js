@@ -41,7 +41,7 @@ function LoginPage() {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 20 }}>
             <View style={loginPage.upper}>
                 <Image source={logo} style={loginPage.image} />
                 <Text style={loginPage.title}>Matchbook</Text>
@@ -84,7 +84,7 @@ function LoginPage() {
                     <Text style={loginPage.buttonText}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
-        </SafeAreaView>
+        </View>
     );
 }
 

@@ -81,7 +81,7 @@ function SignUpPage() {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 20 }}>
             <View style={loginPage.upper}>
                 <Image source={logo} style={loginPage.image} />
                 <Text style={loginPage.title}>Matchbook</Text>
@@ -135,7 +135,7 @@ function SignUpPage() {
                     Back to Login
                 </Text>
             </View>
-        </SafeAreaView>
+        </View>
     );
 }
 
