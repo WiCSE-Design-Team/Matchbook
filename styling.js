@@ -129,51 +129,52 @@ export const matchingPage = StyleSheet.create({
 
 export const chatPage = StyleSheet.create({
     container : {
-        alignItems: 'center', justifyContent: 'top',
-        height: '100%',
-        display: 'flex',
+        flex: 1,
+        alignItems: 'center',
         flexDirection:'column',
+        backgroundColor: '#FDE6E3'
     },
     header : {
-        display: 'flex',
-        alignItems: 'center', 
         justifyContent: 'center',
-        height: '12%',
         width: '100%',
-        backgroundColor: '#818589',
+        paddingTop: 20, paddingBottom: 20, paddingLeft: 30, paddingRight: 30,
+        borderBottomColor: '#9E122C', borderBottomWidth: 1,
     },
-    chats : {
-        height: '88%',
+    title: {
+        fontFamily: 'BaksoSapi',
+        fontSize: 30,
+        color: '#9E122C',
+    },
+    chats: {
+        flex: 1,
         width: '100%',
-        display: 'flex',
         flexDirection: 'column',
-    },
-    chat : {
-        width: '100%',
-        flexShrink: 1,
-        padding: 10,
-        flexDirection: 'row',
         backgroundColor: 'white',
-        borderBlockColor:'black',
-        borderTopWidth: 0,
-        borderWidth: 0.5,
+    },
+    chat: {
+        width: '100%',
+        paddingTop: 15, paddingBottom: 15, paddingLeft: 30, paddingRight: 30,
+        flexDirection: 'row',
+        borderBlockColor:'#FDE6E3', borderBottomWidth: 1,
+        alignItems: 'center', justifyContent: 'space-between',
+    },
+    user: {
+        flexDirection: 'row',
         alignItems: 'center',
     },
-    user : {
+    icon: {
         borderRadius: '50%',
         width: 50,
         height: 50,
-        display: 'flex',
         alignItems: 'center',
         justifyContent:'center',
-        paddingLeft: 1,
-        backgroundColor: '#818589',
+        backgroundColor: '#FBCB77',
     },
-    name : {
-        paddingLeft: 10,
+    name: {
+        paddingLeft: 20,
+        fontFamily: 'Karla-Bold', fontSize: 18, color: '#9E122C',
     },
     arrow: {
-        paddingLeft: '68%',
     }
 });
 

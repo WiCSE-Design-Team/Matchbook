@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import * as React from 'react';
-import { ScrollView, Image, View, Text, StyleSheet, SafeAreaView, Dimensions } from 'react-native';
+import { ScrollView, Image, View, Text, SafeAreaView, Dimensions } from 'react-native';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 import { chatPage } from '../styling';
@@ -41,34 +41,34 @@ function ChatPage() {
                         return(
                             <View key={id} style={chatPage.chat} onClick={openChat(id)}>
                                 <View style={chatPage.user}>
-                                    <FontAwesome6 name="user" size={25} color="black"/>
+                                    <View style={chatPage.icon}>
+                                        <FontAwesome6 name="user" size={20} color='white' />
+                                    </View>
+
+                                    <Text style={chatPage.name}>{chat.name}</Text>
                                 </View>
                                 
-                                <Text style={chatPage.name}>{chat.name}</Text>
                                 <View style={chatPage.arrow}>
-                                    <FontAwesome6 name="greater-than" size={25} color="black" style={chatPage.icon} />
+                                    <FontAwesome6 name="chevron-right" size={25} color="#9E122C" />
                                 </View>
                             </View>
                         )
                     })}
                 </ScrollView>
             )
-            
- 
         }
 
         return (<Text>Loading...</Text>)
-        
     }
 
-
     return (
-        <View style={chatPage.container}>
+        <SafeAreaView style={chatPage.container}>
             <View style={chatPage.header}>
-                <Text style={{paddingTop:'8%', fontWeight:'700', color: 'white'}}>Chats</Text>
+                <Text style={chatPage.title}>Chats</Text>
             </View>
+
             <LoadChats/>
-        </View>
+        </SafeAreaView>
     );
 }
 
