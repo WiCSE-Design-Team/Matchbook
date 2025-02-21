@@ -204,7 +204,92 @@ export const profileCreationPage = StyleSheet.create({
 })
 
 export const profilePage = StyleSheet.create({
-
+    full: {
+        flex: 1,
+        backgroundColor: '#FBCB77'
+    },
+    image: {
+        flex: 1,
+        width: '100%',
+        backgroundColor: '#FBCB77',
+        justifyContent: 'center',
+        alignItems: 'center'  
+    },
+    profile: {
+        backgroundColor: 'white' ,
+        width: '100%',
+        flex: 1,
+        borderTopRightRadius: 35,
+        borderTopLeftRadius: 35,
+        padding: 30,
+    },
+    title: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 20,
+    },
+    intro: {
+        flexDirection: 'row',
+    },
+    name: {
+        fontFamily: 'BaksoSapi', fontSize: 24, color: '#9E122C',
+    },
+    age: { 
+        fontFamily: 'BaksoSapi', fontSize: 24, color: '#9E122C',
+        marginLeft: 5, 
+    },
+    pronouns: {
+        fontFamily: 'Karla', fontSize: 14, color: '#F99D90',
+        marginLeft: 10,
+    },
+    about: {
+        marginBottom: 20,
+    },
+    aboutRow: {
+        flexDirection:'row', justifyContent: "space-between"
+    },
+    rowL: {
+        textAlign: 'left',
+        fontFamily: 'Karla', fontSize: 14, color: '#FBCB77',
+        paddingBottom: 10
+    },
+    rowR: {
+        textAlign: 'right',
+        fontFamily: 'Karla', fontSize: 14,
+        paddingBottom: 10
+    },
+    bio: {
+        flex: 1,
+        marginBottom: 20,
+        fontFamily: 'Karla', fontSize: 14,
+    },
+    tags: {
+        width: '100%',
+        alignItems: 'center', justifyContent: 'left',
+        flexDirection: 'row', gap: 15
+    },
+    scrollView: {
+        gap: 25,
+    },
+    prompts: {
+        borderRadius: 20, borderColor: '#FBCB77', borderWidth: 1,
+        padding: 20, paddingRight: 50,
+    },
+    prompt: {
+        fontFamily: 'BaksoSapi', fontSize: 12, color: '#FBCB77',
+        paddingBottom: 10
+    },
+    response: {
+        fontFamily: 'Karla', fontSize: 20
+    },
+    tag: {
+        borderRadius: 50, borderColor: '#9E122C', borderWidth: 1,
+        padding: 10,
+        justifyContent: 'center', alignContent: 'center',
+    },
+    tagText: {
+        fontFamily: 'Karla', fontSize: 14, color: '#9E122C',
+    },
 })
 
 export const cardFlip = StyleSheet.create ({
@@ -254,7 +339,6 @@ export const cardFlip = StyleSheet.create ({
     bio: { 
         flex: 1,
         fontFamily: 'Karla', fontSize: 14,
-
     },
     tags: {
         width: '100%',
@@ -269,7 +353,6 @@ export const cardFlip = StyleSheet.create ({
     tagText: {
         fontFamily: 'Karla', fontSize: 14, color: '#9E122C',
     },
-    
     about: {
         height: '50%',
         paddingTop: 20, paddingBottom: 20,
