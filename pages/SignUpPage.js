@@ -81,7 +81,7 @@ function SignUpPage() {
     }
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 20 }}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 20, backgroundColor: 'white' }}>
             <View style={loginPage.upper}>
                 <Image source={logo} style={loginPage.image} />
                 <Text style={loginPage.title}>Matchbook</Text>
