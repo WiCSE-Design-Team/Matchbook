@@ -1,10 +1,31 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, Pressable } from 'react-native';
 import MultiSelectComponent from '../components/MultiSelect';
-import CardFlip from '../components/FlipCard';
+import CardFlip from '../components/CardFlip';
+import { FIREBASE_USERINFO } from '../FirebaseConfig';
+import {doc, arrayUnion} from "firebase/firestore";
+import {UID} from '/LoginPage';
+
+import { matchingPage } from '../styling';
+import { getUserByID } from '../components/Requests';
 
 function MatchingPage() {
-    const [isFlipped, setIsFlipped] = useState(false);
+    const userInfo = FIREBASE_USERINFO;
+    const currUser = doc(userInfo, "UserInfo", UID);
+    //need way to get user at top of collection (!= currUser)
+    //const displayedUser
+    const addApproved = async () => {
+        await updateDoc(currUser, {
+            want: arrayUnion("DISPLAY USER'S ID"), //need to access uid of user at top of collection
+          });
+        /*if(currUser UID is in displayedUser want field){
+            await updateDoc(currUser, {
+                matches: arrayUnion("DISPLAY USER'S ID"), //need to access uid of user at top of collection
+             });
+            alert("New match! Go to chat page to start connecting.");
+        }
+        */
+    }
 
     return (
         <SafeAreaView style={styles.fullScreen}>
@@ -17,7 +38,8 @@ function MatchingPage() {
 
             <View style={styles.bottomButtons}>
                 <Pressable
-                    style={({ pressed }) => [{ backgroundColor: pressed ? 'black' : 'white' }, styles.button ]}>
+                    onPress = {() => console.log('Pass button pressed')} //need to move to next user
+                    style={({ pressed }) => [{ backgroundColor: pressed ? '#9E122C' : 'none' }, matchingPage.passButton ]}>
                     {({ pressed }) => (
                         <Text style={[{ color: pressed ? 'white' : 'black' }, styles.buttonText]}>
                             Match
@@ -26,7 +48,8 @@ function MatchingPage() {
                 </Pressable>
 
                 <Pressable
-                    style={({ pressed }) => [{ backgroundColor: pressed ? 'black' : 'white' }, styles.button ]}>
+                    onPress = {() => console.log('Match button pressed')} //need to add to collection, check if present in other collection array, & move to next one
+                    style={({ pressed }) => [{ backgroundColor: pressed ? 'none' : '#9E122C' }, matchingPage.matchButton ]}>
                     {({ pressed }) => (
                         <Text style={[{ color: pressed ? 'white' : 'black' }, styles.buttonText]}>
                             Pass
