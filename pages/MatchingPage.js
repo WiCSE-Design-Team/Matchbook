@@ -4,13 +4,13 @@ import MultiSelectComponent from '../components/MultiSelect';
 import CardFlip from '../components/CardFlip';
 import { FIREBASE_USERINFO } from '../FirebaseConfig';
 import {doc, arrayUnion} from "firebase/firestore";
-import {UID} from '/LoginPage';
+import {UID} from '../pages/LoginPage';
 
 import { matchingPage } from '../styling';
 import { getUserByID } from '../components/Requests';
 
 function MatchingPage() {
-    const userInfo = FIREBASE_USERINFO;
+    /*const userInfo = FIREBASE_USERINFO;
     const currUser = doc(userInfo, "UserInfo", UID);
     //need way to get user at top of collection (!= currUser)
     //const displayedUser
@@ -18,14 +18,14 @@ function MatchingPage() {
         await updateDoc(currUser, {
             want: arrayUnion("DISPLAY USER'S ID"), //need to access uid of user at top of collection
           });
-        /*if(currUser UID is in displayedUser want field){
+        if(currUser UID is in displayedUser want field){
             await updateDoc(currUser, {
                 matches: arrayUnion("DISPLAY USER'S ID"), //need to access uid of user at top of collection
              });
             alert("New match! Go to chat page to start connecting.");
         }
-        */
-    }
+        
+    }*/
 
     return (
         <SafeAreaView style={matchingPage.fullScreen}>
