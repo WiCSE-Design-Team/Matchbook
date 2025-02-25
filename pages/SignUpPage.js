@@ -1,40 +1,62 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
-import { View, Text, Button, TextInput, StyleSheet, Image, BackHandler, TouchableOpacity } from 'react-native';
+import { View, Text, Button, TextInput, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { FIREBASE_AUTH } from '../FirebaseConfig';
-<<<<<<< HEAD
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
-=======
+import { FIREBASE_AUTH, FIREBASE_DB } from '../FirebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
->>>>>>> main
 import { Ionicons } from "@expo/vector-icons";
 
 import logo from '../assets/images/logo.png';
 import { loginPage } from '../styling';
 
-// this is also the landing page
-function LoginPage() {
+function SignUpPage() {
     const navigation = useNavigation();
     const [email, setEmail] = React.useState('');
     const [password, setPass] = React.useState('');
+    const [confirmPassword, setConfirmPass] = React.useState('');
+
     const auth = FIREBASE_AUTH;
+
+    const addUserDB = async(response)=>{
+        //add user to db
+        try{
+
+            //create document (basically row in db table/collection) reference
+            const docRef = doc(FIREBASE_DB, "UserInfo", response.user.uid);
+
+            //set the details of the doc - these are just standins for actual data!
+            const docRes = await setDoc(docRef, {
+                first_name: 'test-first-name', 
+                last_name: 'test-last-name',
+                pronouns: 'she/her',
+                age: '21',
+                school: 'University of Florida',
+                pronouns: 'she/her',
+                major: 'Computer Science',
+                study_style: 'Solitary', 
+                favSpot: 'Library West', 
+                leastSpot: 'Marston', 
+                imgUrl: 'url',
+                want: [],
+                matches: [],
+            });
+
+            console.log(docRes);
+
+        } catch(e){
+            console.log(e);
+        }
+        
+    }
 
     const signIn = async () => {
         try{
             const response = await signInWithEmailAndPassword(auth, email, password);
-            console.log(response);
+            console.log(response.user.uid);
+
+            addUserDB(response);
+
             alert("Sign in successful.");
-<<<<<<< HEAD
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                  const uid = user.uid;
-                } else {
-                  console.log("No user is currently signed in.");
-                }
-              });
-=======
->>>>>>> main
             navigation.navigate('TabNav');
         } catch (error) {
             console.log(error);
@@ -42,10 +64,14 @@ function LoginPage() {
         }
         
     }
+
     const signUp = async () => {
         try{
             const response = await createUserWithEmailAndPassword(auth, email, password);
-            console.log(response);
+
+            //add user to db if not in it
+            addUserDB(response);
+            
             alert("Sign up successful.");
             navigation.navigate('TabNav');
         } catch (error) {
@@ -63,8 +89,8 @@ function LoginPage() {
             </View>
 
             <View style={loginPage.lower}>
-                <Text style={loginPage.welcome}>Welcome! Login In Here</Text>
-                
+                <Text style={loginPage.welcome}> Welcome! Sign Up Here</Text>
+
                 <View style={loginPage.inputContainer}>
                     <Ionicons name="mail" size={20} color="#9E122C" style={loginPage.iconStyle} />
                     <TextInput
@@ -88,23 +114,29 @@ function LoginPage() {
                     />
                 </View>
 
-                <TouchableOpacity style={loginPage.button} onPress={signIn}>
-                    <Text style={loginPage.buttonText}>Login</Text>
-                </TouchableOpacity>
-    
-                <Text style={loginPage.orText}>or</Text>
-    
-                <TouchableOpacity style={loginPage.button} onPress = {() => navigation.navigate('SignUp')}>
+                {/* feel free to delete the confirm password, just thought it would be a cool feature if possible */}
+                <View style={loginPage.inputContainer}>
+                    <Ionicons name="lock-closed" size={20} color="#9E122C" style={loginPage.iconStyle} />
+                    <TextInput
+                        secureTextEntry
+                        style={loginPage.input}
+                        onChangeText = {setConfirmPass}
+                        placeholder='Confirm Password'
+                        placeholderTextColor='#F99D90'
+                        value = {confirmPassword}
+                    />
+                </View>
+
+                <TouchableOpacity style={loginPage.button} onPress = {signUp}>
                     <Text style={loginPage.buttonText}>Sign Up</Text>
                 </TouchableOpacity>
+
+                <Text style={loginPage.orText} onPress={() => navigation.navigate('Login')}>
+                    Back to Login
+                </Text>
             </View>
         </View>
     );
 }
 
-<<<<<<< HEAD
-export default LoginPage;
-export const UID = uid;
-=======
-export default LoginPage;
->>>>>>> main
+export default SignUpPage;

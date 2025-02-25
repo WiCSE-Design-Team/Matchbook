@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { MultiSelect } from 'react-native-element-dropdown';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+
+import { multiselect } from '../styling';
 
 const data = [
     { label: 'CIS3401', value: '1' },
@@ -15,64 +17,36 @@ const MultiSelectComponent = () => {
   const [selected, setSelected] = useState([]);
 
   return (
-    <View style={styles.container}>
+    <View style={multiselect.container}>
       <MultiSelect
-        style={styles.dropdown}
-        placeholderStyle={styles.placeholderStyle}
-        selectedTextStyle={styles.selectedTextStyle}
-        itemTextStyle={styles.itemTextStyle}
-        inputSearchStyle={styles.inputSearchStyle}
-        iconStyle={styles.iconStyle}
+        style={multiselect.dropdown}
+        placeholderStyle={multiselect.placeholder}
+        selectedTextStyle={multiselect.selectedText}
+        itemTextStyle={multiselect.itemText}
+        inputSearchStyle={multiselect.inputSearch}
+        iconStyle={multiselect.icon}
+        containerStyle={multiselect.list}
+        maxHeight={200}
+        iconColor='white'
         search
         data={data}
         labelField="label"
         valueField="value"
         placeholder="Select Course"
         searchPlaceholder="Search..."
+        alwaysRenderSelectedItem
+        maxSelect={3}
         value={selected}
         onChange={item => {
           setSelected(item);
         }}
         renderLeftIcon={() => (
-            <FontAwesome6 name="filter" size={22} color="black" style={styles.icon} />
+            <FontAwesome6 name="filter" size={22} color="white" style={multiselect.icon} />
         )}
-        selectedStyle={styles.selectedStyle}
+        selectedStyle={multiselect.selected}
       />
     </View>
   );
 };
 
 export default MultiSelectComponent;
-
-const styles = StyleSheet.create({
-    dropdown: {
-        height: 50, width: 200,
-        backgroundColor: 'transparent',
-        borderColor: 'black', borderWidth: '1',
-        padding: 10
-    },
-
-    placeholderStyle: {
-        fontSize: 12,
-    },
-    selectedTextStyle: {
-        fontSize: 12,
-    },
-    itemTextStyle:{
-        fontSize: 12,
-    },
-    iconStyle: {
-        width: 20,
-        height: 20,
-    },
-    inputSearchStyle: {
-        height: 30,
-        fontSize: 12,
-    },
-    icon: {
-        marginRight: 10,
-    },
-    selectedStyle: {
-        borderRadius: 12,
-    },
-});

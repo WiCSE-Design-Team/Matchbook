@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, Pressable } from 'react-native';
+import { SafeAreaView, View, Text, Pressable } from 'react-native';
 import MultiSelectComponent from '../components/MultiSelect';
 import CardFlip from '../components/CardFlip';
 import { FIREBASE_USERINFO } from '../FirebaseConfig';
@@ -28,21 +28,21 @@ function MatchingPage() {
     }
 
     return (
-        <SafeAreaView style={styles.fullScreen}>
-            <View style={styles.multiselect}>
+        <SafeAreaView style={matchingPage.fullScreen}>
+            <View style={matchingPage.multiselect}>
                 <MultiSelectComponent />
             </View>
-            <View style={styles.card}>
+            <View style={matchingPage.card}>
                 <CardFlip/>
             </View>
 
-            <View style={styles.bottomButtons}>
+            <View style={matchingPage.bottomButtons}>
                 <Pressable
                     onPress = {() => console.log('Pass button pressed')} //need to move to next user
                     style={({ pressed }) => [{ backgroundColor: pressed ? '#9E122C' : 'none' }, matchingPage.passButton ]}>
                     {({ pressed }) => (
-                        <Text style={[{ color: pressed ? 'white' : 'black' }, styles.buttonText]}>
-                            Match
+                        <Text style={[{ color: pressed ? 'white' : '#9E122C' }, matchingPage.buttonText]}>
+                            Pass
                         </Text>
                     )}
                 </Pressable>
@@ -51,8 +51,8 @@ function MatchingPage() {
                     onPress = {() => console.log('Match button pressed')} //need to add to collection, check if present in other collection array, & move to next one
                     style={({ pressed }) => [{ backgroundColor: pressed ? 'none' : '#9E122C' }, matchingPage.matchButton ]}>
                     {({ pressed }) => (
-                        <Text style={[{ color: pressed ? 'white' : 'black' }, styles.buttonText]}>
-                            Pass
+                        <Text style={[{ color: pressed ? '#9E122C' : 'white' }, matchingPage.buttonText]}>
+                            Match
                         </Text>
                     )}
                 </Pressable>
@@ -62,36 +62,3 @@ function MatchingPage() {
 }
 
 export default MatchingPage;
-
-const styles = StyleSheet.create({
-    fullScreen: {
-        alignItems: 'center', justifyContent: 'top',
-        height: '100%'
-    },
-    multiselect: {
-        width: '90%',
-        alignItems: 'center', justifyContent: 'left',
-        marginBottom: 20,
-        flexDirection: 'row'
-    },
-    icon: {
-
-    },
-    card: {
-        width: '90%', height: '70%',
-        flex: 1,
-    },
-    bottomButtons: {
-        width: '90%',
-        flexDirection: 'row', justifyContent: 'space-between',
-    },
-    button: {
-        width: '45%',
-        borderColor: 'black', borderWidth: '1',
-        marginTop: 20, marginBottom: 10, padding: 10,
-        alignContent: 'center', justifyContent: 'center'
-    },
-    buttonText: {
-        textAlign: 'center',
-    }
-})
