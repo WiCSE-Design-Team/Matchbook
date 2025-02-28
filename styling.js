@@ -164,17 +164,40 @@ export const chatPage = StyleSheet.create({
     },
     icon: {
         borderRadius: '50%',
-        width: 50,
-        height: 50,
-        alignItems: 'center',
-        justifyContent:'center',
+        width: 50, height: 50,
+        alignItems: 'center', justifyContent:'center',
         backgroundColor: '#FBCB77',
     },
     name: {
         paddingLeft: 20,
         fontFamily: 'Karla-Bold', fontSize: 18, color: '#9E122C',
     },
-    arrow: {
+    matchesContainer: {
+        width: '100%',
+        paddingTop: 20, paddingBottom: 20, paddingLeft: 30, paddingRight: 30,
+        backgroundColor: 'white',
+        borderBottomColor: '#9E122C', borderBottomWidth: 1,
+    },
+    matches: {
+        gap: 25,
+    },
+    matchesTitle: {
+        fontFamily: 'Karla-Bold', fontSize: 20, color: '#9E122C',
+        paddingBottom: 20,
+    },
+    match: {
+        flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center', gap: 5
+        
+    },
+    matchName: {
+        fontFamily: 'Karla', fontSize: 12, color: '#9E122C',
+    },
+    matchIcon: {
+        borderRadius: '50%', borderColor: '#9E122C', borderWidth: 1,
+        width: 60, height: 60,
+        alignItems: 'center', justifyContent:'center',
+        backgroundColor: '#FDE6E3',
     }
 });
 
