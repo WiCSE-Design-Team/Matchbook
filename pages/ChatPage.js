@@ -4,12 +4,15 @@ import { ScrollView, Image, View, Text, SafeAreaView, Dimensions } from 'react-n
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 import { chatPage } from '../styling';
+import { useNavigation } from '@react-navigation/native';
 
 function openChat(id){
-    //navigate to chat between
+
 }
 
 function LoadChats(){
+    const navigation = useNavigation();
+
     const [chats, setChats] = useState([
         {
             name : "Paige",
@@ -37,7 +40,7 @@ function LoadChats(){
                 {chats.map((chat, id)=> {
                     console.log(chat.name);
                     return(
-                        <View key={id} style={chatPage.chat} onClick={openChat(id)}>
+                        <View key={id} style={chatPage.chat} onTouchEnd={() => navigation.navigate('Chat', {name: chat.name})}>
                             <View style={chatPage.user}>
                                 <View style={chatPage.icon}>
                                     <FontAwesome6 name="user" size={20} color='white' />
@@ -118,9 +121,5 @@ function ChatPage() {
         </SafeAreaView>
     );
 }
-
-//width, height
-
-const dimScreen= Dimensions.get("screen");
 
 export default ChatPage;
