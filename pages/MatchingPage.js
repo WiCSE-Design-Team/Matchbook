@@ -13,6 +13,7 @@ function MatchingPage() {
     /*const userInfo = FIREBASE_USERINFO;
     const currUser = doc(userInfo, "UserInfo", UID);
     //need way to get user at top of collection (!= currUser)
+    //getAllUsers in Requests.js returns array of users
     //const displayedUser
     const addApproved = async () => {
         await updateDoc(currUser, {
