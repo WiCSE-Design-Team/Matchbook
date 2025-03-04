@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, Text, Pressable } from 'react-native';
 import MultiSelectComponent from '../components/MultiSelect';
-import CardFlip from '../components/CardFlip';
+import CardFlip from '../components/FlipCard';
 import { FIREBASE_USERINFO } from '../FirebaseConfig';
 import {doc, arrayUnion} from "firebase/firestore";
 import {UID} from '../pages/LoginPage';
@@ -13,8 +13,12 @@ function MatchingPage() {
     /*const userInfo = FIREBASE_USERINFO;
     const currUser = doc(userInfo, "UserInfo", UID);
     //need way to get user at top of collection (!= currUser)
+<<<<<<< Updated upstream
     //getAllUsers in Requests.js returns array of users
     //const displayedUser
+=======
+    //const displayedUser = top user of collection
+>>>>>>> Stashed changes
     const addApproved = async () => {
         await updateDoc(currUser, {
             want: arrayUnion("DISPLAY USER'S ID"), //need to access uid of user at top of collection
