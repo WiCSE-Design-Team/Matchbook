@@ -198,7 +198,20 @@ export const chatPage = StyleSheet.create({
         width: 60, height: 60,
         alignItems: 'center', justifyContent:'center',
         backgroundColor: '#FDE6E3',
-    }
+    },
+    messageContainer: {
+        padding: 8,
+        backgroundColor: '#f1f1f1',
+        marginVertical: 5,
+        borderRadius: 8,
+      },
+      input: {
+        height: 40,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        marginBottom: 12,
+        paddingLeft: 8,
+      },
 });
 
 export const profileCreationPage = StyleSheet.create({

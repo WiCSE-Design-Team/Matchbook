@@ -9,10 +9,10 @@ import Chat from './Chat';
 const Stack = createNativeStackNavigator();
 
 function ChatStack() {
-    
+
   return (
     <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName='ChatPage'>
+      <Stack.Navigator initialRouteName='ChatList'>
         <Stack.Screen name="ChatPage" component={ChatPage} options={{ headerShown: false }}/>
         <Stack.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
       </Stack.Navigator>
