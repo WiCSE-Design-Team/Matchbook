@@ -2,12 +2,16 @@ import * as React from 'react';
 import { View, TextInput, SafeAreaView, KeyboardAvoidingView, Button } from 'react-native';
 
 import { profileCreationPage } from '../styling';
+import { setUserId } from '@react-native-firebase/crashlytics';
+import {setUserDetails} from '../components/Requests';
 
 function ProfileCreationPage() {
     const [firstName, setFirstName] = React.useState('');
     const firstNameRef = React.useRef(null);
     const [lastName, setLastName] = React.useState('');
     const lastNameRef = React.useRef(null);
+    const [pronouns, setPronouns] = React.useState('');
+    const pronounsRef = React.useRef(null);
     const [age, setAge] = React.useState('');
     const ageRef = React.useRef(null);
     const [university, setUniversity] = React.useState('');
@@ -20,7 +24,25 @@ function ProfileCreationPage() {
     const libraryRef = React.useRef(null);
 
     const temp = async () => {
-
+        /*first_name: args[0], 
+          last_name: args[1],
+          pronouns: args[2],
+          age: args[3],
+          school: args[4],
+          year: args[5],
+          major: args[6],
+          course: args[7],
+          bio: args[8],
+          --study_style: 'Solitary', 
+          favSpot: 'Library West', 
+          leastSpot: 'Marston', --
+          prompt_choice: args[9],
+          prompt_answer: args[10],
+          img_url: args[11],
+          wants: [],
+          matches: [],*/
+        setUserDetails(firstName, lastName, pronouns, age, university, year, "Computer Science", course, "Hi, this is my bio!", "What's your favorite study spot?", library, "url")
+        
     }
 
     return (
@@ -44,6 +66,15 @@ function ProfileCreationPage() {
                         ref={lastNameRef}
                         returnKeyType="next"
                         onSubmitEditing={() => ageRef.current.focus()}
+                    />
+                    <TextInput
+                        style={profileCreationPage.input}
+                        onChangeText = {setPronouns}
+                        placeholder='Pronouns'
+                        value = {pronouns}
+                        ref={pronounsRef}
+                        returnKeyType="next"
+                        onSubmitEditing={() => lastNameRef.current.focus()}
                     />
                     <TextInput
                         style={profileCreationPage.input}

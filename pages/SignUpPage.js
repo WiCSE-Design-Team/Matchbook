@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { FIREBASE_AUTH, FIREBASE_DB } from '../FirebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
 import { Ionicons } from "@expo/vector-icons";
+import {addUserDB} from '../components/Requests'
 
 import logo from '../assets/images/logo.png';
 import { loginPage } from '../styling';
@@ -19,34 +20,8 @@ function SignUpPage() {
 
     const addUserDB = async(response)=>{
         //add user to db
-        try{
-
-            //create document (basically row in db table/collection) reference
-            const docRef = doc(FIREBASE_DB, "UserInfo", response.user.uid);
-
-            //set the details of the doc - these are just standins for actual data!
-            const docRes = await setDoc(docRef, {
-                first_name: 'test-first-name', 
-                last_name: 'test-last-name',
-                pronouns: 'she/her',
-                age: '21',
-                school: 'University of Florida',
-                pronouns: 'she/her',
-                major: 'Computer Science',
-                study_style: 'Solitary', 
-                favSpot: 'Library West', 
-                leastSpot: 'Marston', 
-                imgUrl: 'url',
-                want: [],
-                matches: [],
-            });
-
-            console.log(docRes);
-
-        } catch(e){
-            console.log(e);
-        }
         
+        addUserDB(response)
     }
 
     const signIn = async () => {
