@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, TextInput, SafeAreaView, KeyboardAvoidingView, Button } from 'react-native';
+import { View, TextInput, SafeAreaView, KeyboardAvoidingView, Button, Text } from 'react-native';
 
 import { profileCreationPage } from '../styling';
 
@@ -25,12 +25,15 @@ function ProfileCreationPage() {
 
     return (
         <SafeAreaView style={profileCreationPage.fullScreen}>
+            <View style={profileCreationPage.section}>               
             <KeyboardAvoidingView behavior='padding'>
-                <View>
+                <View style={profileCreationPage.inputContainer}> 
+                    <Text style={profileCreationPage.title}>Make Your Profile!</Text>
                     <TextInput
                         style={profileCreationPage.input}
                         onChangeText = {setFirstName}
                         placeholder='First Name'
+                        placeholderTextColor='#F99D90'
                         value = {firstName}
                         ref={firstNameRef}
                         returnKeyType="next"
@@ -40,6 +43,7 @@ function ProfileCreationPage() {
                         style={profileCreationPage.input}
                         onChangeText = {setLastName}
                         placeholder='Last Name'
+                        placeholderTextColor='#F99D90'
                         value = {lastName}
                         ref={lastNameRef}
                         returnKeyType="next"
@@ -49,6 +53,7 @@ function ProfileCreationPage() {
                         style={profileCreationPage.input}
                         onChangeText = {setAge}
                         placeholder='Age'
+                        placeholderTextColor='#F99D90'
                         value = {age}
                         ref={ageRef}
                         returnKeyType="next"
@@ -58,6 +63,7 @@ function ProfileCreationPage() {
                         style={profileCreationPage.input}
                         onChangeText = {setUniversity}
                         placeholder='University'
+                        placeholderTextColor='#F99D90'
                         value = {university}
                         ref={universityRef}    
                         returnKeyType="next"
@@ -67,6 +73,7 @@ function ProfileCreationPage() {
                         style={profileCreationPage.input}
                         onChangeText = {setCourse}
                         placeholder='Course'
+                        placeholderTextColor='#F99D90'
                         value = {course}
                         ref={courseRef}
                         returnKeyType="next"
@@ -76,6 +83,7 @@ function ProfileCreationPage() {
                         style={profileCreationPage.input}
                         onChangeText = {setYear}
                         placeholder='Academic Year'
+                        placeholderTextColor='#F99D90'
                         value = {year}
                         ref={yearRef}
                         returnKeyType="next"
@@ -85,6 +93,7 @@ function ProfileCreationPage() {
                         style={profileCreationPage.input}
                         onChangeText = {setLibrary}
                         placeholder='Favorite Library'
+                        placeholderTextColor='#F99D90'
                         value = {library}
                         ref={libraryRef}
                         returnKeyType="done"
@@ -93,12 +102,13 @@ function ProfileCreationPage() {
                     <View style = {profileCreationPage.butn}>
                         <Button 
                             title='Create Profile'
-                            color="#FE8C46"
+                            color="white"
                             onPress = {temp}
                         />
                     </View>
                 </View>
             </KeyboardAvoidingView>
+            </View>  
         </SafeAreaView>
     )
 }

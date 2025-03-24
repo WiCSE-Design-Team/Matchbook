@@ -217,26 +217,53 @@ export const chatPage = StyleSheet.create({
 export const profileCreationPage = StyleSheet.create({
     fullScreen: {
         alignItems: 'center', justifyContent: 'center',
-        height: '100%'
+        height: '100%',
+        backgroundColor: 'white'
     },
+
+    section: {
+        backgroundColor: '#FDE6E3', 
+        flex: 1,
+        width: '100%', 
+        top: 150, 
+        borderTopRightRadius: 100,
+        borderTopLeftRadius: 100,
+        padding: 50, 
+    }, 
+
+    title: {
+        fontSize: 20,
+        color: '#9E122C',
+        fontWeight: 'bold',
+        fontFamily: 'Karla',
+        top: -20, 
+        textAlign: 'center',
+    }, 
+
+    inputContainer: {
+        alignItems: 'center',
+        width: '100%', 
+    },
+
     input: {
         height: 40,
         margin: 12,
         borderWidth: 1,
         padding: 10,
-        backgroundColor: 'FEBC46',
+        backgroundColor: 'white',
         color: '#000000',
         borderRadius: 20,
-        borderColor: '#C5C6C7',
+        borderColor: 'white',
         width: 200,
     },
     butn: {
-        borderRadius: 17,
-        borderColor: '#C5C6C7',
-        alignItems: 'center',
-        width: 200,
+        height: 40,
+        margin: 12,
         borderWidth: 1,
-        marginTop: 20,
+        backgroundColor: '#9E122C',
+        borderRadius: 20,
+        borderColor: '#9E122C',
+        width: 200,
     },
 })
 

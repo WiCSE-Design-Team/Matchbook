@@ -73,7 +73,7 @@ function SignUpPage() {
             addUserDB(response);
             
             alert("Sign up successful.");
-            navigation.navigate('TabNav');
+            navigation.navigate('ProfileCreation');
         } catch (error) {
             console.log(error);
             alert("Sign up failed.");
