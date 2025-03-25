@@ -216,55 +216,64 @@ export const chatPage = StyleSheet.create({
 
 export const profileCreationPage = StyleSheet.create({
     fullScreen: {
-        alignItems: 'center', justifyContent: 'center',
-        height: '100%',
+        alignItems: 'center',
+        width: '100%', height: '100%',
         backgroundColor: 'white'
     },
 
-    section: {
-        backgroundColor: '#FDE6E3', 
-        flex: 1,
-        width: '100%', 
-        top: 150, 
-        borderTopRightRadius: 100,
-        borderTopLeftRadius: 100,
-        padding: 50, 
+    title: {
+        width: '100%',
+        paddingTop: 30, paddingBottom: 30, paddingLeft: 20, paddingRight: 20,
+        borderBottomWidth: 1, borderColor: '#9E122C',
     }, 
 
-    title: {
-        fontSize: 20,
+    titleText: {
+        fontSize: 22,
         color: '#9E122C',
         fontWeight: 'bold',
-        fontFamily: 'Karla',
-        top: -20, 
-        textAlign: 'center',
+        fontFamily: 'BaksoSapi',
     }, 
 
-    inputContainer: {
-        alignItems: 'center',
-        width: '100%', 
+    inputs: {
+        marginTop: 20,
+        width: '100%',
     },
 
     input: {
-        height: 40,
-        margin: 12,
-        borderWidth: 1,
+        marginBottom: 20, marginLeft: 20, marginRight: 20,
+        paddingLeft: 20, paddingTop: 12, paddingBottom: 12,
+        borderRadius: 100,
+        backgroundColor: '#FDE6E3',
+        fontFamily: 'Karla', color: '#9E122C', fontSize: 14
+    },
+    button: {
+        marginLeft: 20, marginRight: 20,
         padding: 10,
-        backgroundColor: 'white',
-        color: '#000000',
-        borderRadius: 20,
-        borderColor: 'white',
-        width: 200,
-    },
-    butn: {
-        height: 40,
-        margin: 12,
-        borderWidth: 1,
+        borderWidth: 1, borderRadius: 100, borderColor: '#9E122C',
         backgroundColor: '#9E122C',
-        borderRadius: 20,
-        borderColor: '#9E122C',
-        width: 200,
     },
+    buttonText: {
+        fontFamily: 'Karla', color: 'white', fontSize: 18,
+        textAlign: 'center'
+    },
+    dropdown: {
+        marginBottom: 20, marginLeft: 20, marginRight: 20,
+        paddingLeft: 20, paddingTop: 12, paddingBottom: 12,
+        borderRadius: 100,
+        backgroundColor: '#FDE6E3',
+    },
+    placeholder: {
+        fontFamily: 'Karla', fontSize: 14, color: '#F99D90'
+    },
+    selectedText: {
+        fontFamily: 'Karla', fontSize: 14, color: '#9E122C'
+    },
+    itemText:{
+        fontSize: 12,
+    },
+    list: {
+        borderRadius: 15
+    }
 })
 
 export const profilePage = StyleSheet.create({

@@ -1,4 +1,4 @@
-const CISEcourses = [
+export const CISEcourses = [
     {
         courseCode: 'CAI 4104',
         courseName: 'Machine Learning Engineering',
