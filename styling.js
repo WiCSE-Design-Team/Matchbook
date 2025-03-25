@@ -164,44 +164,116 @@ export const chatPage = StyleSheet.create({
     },
     icon: {
         borderRadius: '50%',
-        width: 50,
-        height: 50,
-        alignItems: 'center',
-        justifyContent:'center',
+        width: 50, height: 50,
+        alignItems: 'center', justifyContent:'center',
         backgroundColor: '#FBCB77',
     },
     name: {
         paddingLeft: 20,
         fontFamily: 'Karla-Bold', fontSize: 18, color: '#9E122C',
     },
-    arrow: {
-    }
+    matchesContainer: {
+        width: '100%',
+        paddingTop: 20, paddingBottom: 20, paddingLeft: 30, paddingRight: 30,
+        backgroundColor: 'white',
+        borderBottomColor: '#9E122C', borderBottomWidth: 1,
+    },
+    matches: {
+        gap: 25,
+    },
+    matchesTitle: {
+        fontFamily: 'Karla-Bold', fontSize: 20, color: '#9E122C',
+        paddingBottom: 20,
+    },
+    match: {
+        flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center', gap: 5
+        
+    },
+    matchName: {
+        fontFamily: 'Karla', fontSize: 12, color: '#9E122C',
+    },
+    matchIcon: {
+        borderRadius: '50%', borderColor: '#9E122C', borderWidth: 1,
+        width: 60, height: 60,
+        alignItems: 'center', justifyContent:'center',
+        backgroundColor: '#FDE6E3',
+    },
+    messageContainer: {
+        padding: 8,
+        backgroundColor: '#f1f1f1',
+        marginVertical: 5,
+        borderRadius: 8,
+      },
+      input: {
+        height: 40,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        marginBottom: 12,
+        paddingLeft: 8,
+      },
 });
 
 export const profileCreationPage = StyleSheet.create({
     fullScreen: {
-        alignItems: 'center', justifyContent: 'center',
-        height: '100%'
-    },
-    input: {
-        height: 40,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-        backgroundColor: 'FEBC46',
-        color: '#000000',
-        borderRadius: 20,
-        borderColor: '#C5C6C7',
-        width: 200,
-    },
-    butn: {
-        borderRadius: 17,
-        borderColor: '#C5C6C7',
         alignItems: 'center',
-        width: 200,
-        borderWidth: 1,
-        marginTop: 20,
+        width: '100%', height: '100%',
+        backgroundColor: 'white'
     },
+
+    title: {
+        width: '100%',
+        paddingTop: 30, paddingBottom: 30, paddingLeft: 20, paddingRight: 20,
+        borderBottomWidth: 1, borderColor: '#9E122C',
+    }, 
+
+    titleText: {
+        fontSize: 22,
+        color: '#9E122C',
+        fontWeight: 'bold',
+        fontFamily: 'BaksoSapi',
+    }, 
+
+    inputs: {
+        marginTop: 20,
+        width: '100%',
+    },
+
+    input: {
+        marginBottom: 20, marginLeft: 20, marginRight: 20,
+        paddingLeft: 20, paddingTop: 12, paddingBottom: 12,
+        borderRadius: 100,
+        backgroundColor: '#FDE6E3',
+        fontFamily: 'Karla', color: '#9E122C', fontSize: 14
+    },
+    button: {
+        marginLeft: 20, marginRight: 20,
+        padding: 10,
+        borderWidth: 1, borderRadius: 100, borderColor: '#9E122C',
+        backgroundColor: '#9E122C',
+    },
+    buttonText: {
+        fontFamily: 'Karla', color: 'white', fontSize: 18,
+        textAlign: 'center'
+    },
+    dropdown: {
+        marginBottom: 20, marginLeft: 20, marginRight: 20,
+        paddingLeft: 20, paddingTop: 12, paddingBottom: 12,
+        borderRadius: 100,
+        backgroundColor: '#FDE6E3',
+    },
+    placeholder: {
+        fontFamily: 'Karla', fontSize: 14, color: '#F99D90'
+    },
+    selectedText: {
+        fontFamily: 'Karla', fontSize: 14, color: '#9E122C'
+    },
+    itemText:{
+        fontSize: 12,
+    },
+    list: {
+        borderRadius: 15
+    }
 })
 
 export const profilePage = StyleSheet.create({

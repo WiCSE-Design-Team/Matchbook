@@ -1,103 +1,174 @@
-import * as React from 'react';
-import { View, TextInput, SafeAreaView, KeyboardAvoidingView, Button } from 'react-native';
+import React, { useState } from 'react';
+import { View, TextInput, SafeAreaView, KeyboardAvoidingView, TouchableOpacity, Text, ScrollView } from 'react-native';
 
 import { profileCreationPage } from '../styling';
+import { Dropdown } from 'react-native-element-dropdown';
+import { FIREBASE_DB } from '../FirebaseConfig';
+import { getAuth } from 'firebase/auth';
+import { addDoc, collection } from 'firebase/firestore';
+import { useNavigation } from '@react-navigation/native';
 
 function ProfileCreationPage() {
+    const navigation = useNavigation();
     const [firstName, setFirstName] = React.useState('');
-    const firstNameRef = React.useRef(null);
     const [lastName, setLastName] = React.useState('');
-    const lastNameRef = React.useRef(null);
+    const [pronouns, setPronouns] = React.useState('');
     const [age, setAge] = React.useState('');
-    const ageRef = React.useRef(null);
     const [university, setUniversity] = React.useState('');
-    const universityRef = React.useRef(null);
-    const [course, setCourse] = React.useState('');
-    const courseRef = React.useRef(null);
     const [year, setYear] = React.useState('');
-    const yearRef = React.useRef(null);
-    const [library, setLibrary] = React.useState('');
-    const libraryRef = React.useRef(null);
+    const [major, setMajor] = React.useState('');
+    const [bio, setBio] = React.useState('');
+    const [prompt, setPrompt] = React.useState('');
+    const [response, setResponse] = React.useState('');
+    
+    const prompts = [
+        {
+            prompt: 'What is your study style?'
+        },
+        {
+            prompt: 'What is your favorite study spot?'
+        },
+        {
+            prompt: 'What is your personality type?'
+        },
+        {
+            prompt: 'What is your preferred study group size?'
+        },
+        {
+            prompt: 'What is your least favorite study spot?'
+        },
+        {
+            prompt: 'What is a study spot you’ve been wanting to try?'
+        },
+        {
+            prompt: 'Favorite coffee shop?'
+        },
+    ]
 
-    const temp = async () => {
+    const currentUser = getAuth().currentUser;
 
-    }
+    const createProfile = async (uid, firstName, lastName, pronouns, age, university, year, major, bio, prompt, response) => {
+        const usersCollectionRef = collection(FIREBASE_DB, 'users');
+
+        try {
+            const newUser = await addDoc(usersCollectionRef, {
+                uid: uid,
+                firstName: firstName,
+                lastName: lastName,
+                pronouns: pronouns,
+                age: age,
+                university: university,
+                year: year,
+                major: major,
+                bio: bio,
+                prompt: prompt,
+                response: response,
+            });
+
+            console.log('new chat created with id: ', newUser.id);
+            navigation.navigate('TabNav');
+        }
+        catch (error) {
+            console.log('error creating new profile: ', error);
+            return null;
+        }
+    };
 
     return (
-        <SafeAreaView style={profileCreationPage.fullScreen}>
-            <KeyboardAvoidingView behavior='padding'>
-                <View>
+        <SafeAreaView style={profileCreationPage.fullScreen}> 
+            <View style={profileCreationPage.title}>
+                <Text style={profileCreationPage.titleText}>Create Your Profile!</Text>
+            </View>
+
+            <KeyboardAvoidingView behavior='padding' style={{ width: '100%'}}>
+                <ScrollView style={profileCreationPage.inputs}> 
                     <TextInput
                         style={profileCreationPage.input}
                         onChangeText = {setFirstName}
                         placeholder='First Name'
+                        placeholderTextColor='#F99D90'
                         value = {firstName}
-                        ref={firstNameRef}
-                        returnKeyType="next"
-                        onSubmitEditing={() => lastNameRef.current.focus()}
                     />
                     <TextInput
                         style={profileCreationPage.input}
                         onChangeText = {setLastName}
                         placeholder='Last Name'
+                        placeholderTextColor='#F99D90'
                         value = {lastName}
-                        ref={lastNameRef}
-                        returnKeyType="next"
-                        onSubmitEditing={() => ageRef.current.focus()}
+                    />
+                    <TextInput
+                        style={profileCreationPage.input}
+                        onChangeText = {setPronouns}
+                        placeholder='Pronouns'
+                        placeholderTextColor='#F99D90'
+                        value = {pronouns}
                     />
                     <TextInput
                         style={profileCreationPage.input}
                         onChangeText = {setAge}
+                        keyboardType='numeric'
                         placeholder='Age'
+                        placeholderTextColor='#F99D90'
                         value = {age}
-                        ref={ageRef}
-                        returnKeyType="next"
-                        onSubmitEditing={() => universityRef.current.focus()}
                     />
                     <TextInput
                         style={profileCreationPage.input}
                         onChangeText = {setUniversity}
                         placeholder='University'
+                        placeholderTextColor='#F99D90'
                         value = {university}
-                        ref={universityRef}    
-                        returnKeyType="next"
-                        onSubmitEditing={() => courseRef.current.focus()}
-                    />
-                    <TextInput
-                        style={profileCreationPage.input}
-                        onChangeText = {setCourse}
-                        placeholder='Course'
-                        value = {course}
-                        ref={courseRef}
-                        returnKeyType="next"
-                        onSubmitEditing={() => yearRef.current.focus()}
                     />
                     <TextInput
                         style={profileCreationPage.input}
                         onChangeText = {setYear}
                         placeholder='Academic Year'
+                        placeholderTextColor='#F99D90'
                         value = {year}
-                        ref={yearRef}
-                        returnKeyType="next"
-                        onSubmitEditing={() => libraryRef.current.focus()}
                     />
                     <TextInput
                         style={profileCreationPage.input}
-                        onChangeText = {setLibrary}
-                        placeholder='Favorite Library'
-                        value = {library}
-                        ref={libraryRef}
-                        returnKeyType="done"
+                        onChangeText = {setMajor}
+                        placeholder='Major'
+                        placeholderTextColor='#F99D90'
+                        value = {major}
+                    />
+                    <TextInput
+                        style={profileCreationPage.input}
+                        onChangeText = {setBio}
+                        placeholder='Type a short introduction or bio'
+                        placeholderTextColor='#F99D90'
+                        value = {bio}
+                        multiline
+                        numberOfLines={4}
+                        textAlignVertical='top'
+                    />
+                    <Dropdown
+                        style={profileCreationPage.dropdown}
+                        placeholderStyle={profileCreationPage.placeholder}
+                        selectedTextStyle={profileCreationPage.selectedText}
+                        itemTextStyle={profileCreationPage.itemText}
+                        containerStyle={profileCreationPage.list}
+                        data={prompts}
+                        labelField="prompt"
+                        valueField="prompt"
+                        placeholder="Select Prompt"
+                        value={prompt}
+                        onChange={item => {
+                            setPrompt(item);
+                          }}
+                    />
+                    <TextInput
+                        style={profileCreationPage.input}
+                        onChangeText = {setResponse}
+                        placeholder='Prompt Response'
+                        placeholderTextColor='#F99D90'
+                        value = {response}
                     />
 
-                    <View style = {profileCreationPage.butn}>
-                        <Button 
-                            title='Create Profile'
-                            color="#FE8C46"
-                            onPress = {temp}
-                        />
-                    </View>
-                </View>
+                    <TouchableOpacity style={profileCreationPage.button} onPress={() => createProfile(currentUser.uid, firstName, lastName, pronouns, age, university, year, major, bio, prompt, response)}>
+                        <Text style={profileCreationPage.buttonText}>Create Profile</Text>
+                    </TouchableOpacity>
+                </ScrollView>
             </KeyboardAvoidingView>
         </SafeAreaView>
     )
