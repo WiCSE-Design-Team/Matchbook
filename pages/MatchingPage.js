@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, Text, Pressable } from 'react-native';
 import MultiSelectComponent from '../components/MultiSelect';
-import CardFlip from '../components/FlipCard';
+import CardFlip from '../components/CardFlip';
 import { FIREBASE_USERINFO } from '../FirebaseConfig';
 import {doc, arrayUnion} from "firebase/firestore";
 import {UID} from '../pages/LoginPage';
