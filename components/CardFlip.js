@@ -1,45 +1,56 @@
 import React, { useState, useEffect } from "react";
 import { View, Image, Text } from 'react-native';
 import FlipCard from 'react-native-flip-card';
+import { EventRegister } from "react-native-event-listeners"; 
 
 import { FIREBASE_AUTH, FIREBASE_DB } from '../FirebaseConfig';
+import { FIREBASE_USERINFO , FIREBASE_USERS} from '../FirebaseConfig';
+import { getAuth } from 'firebase/auth';
 import {collection, getDocs, orderBy, query, doc, setDoc, getDoc} from "firebase/firestore";
 
 import { cardFlip } from '../styling'
 import { FontAwesome6 } from "@expo/vector-icons";
 
 function CardFlip() {
-    const [fireData, setFireData] = useState(null);
-
+    const userInfo = FIREBASE_USERS;
+    const currentUser = getAuth().currentUser;
+    const [users, setUsers] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    
     useEffect(() => {
-        let processing = true;
-        firebaseData(processing);
+        const fetchUsers = async () => {
+            try {
+                const querySnapshot = await getDocs(userInfo);
+                const usersList = querySnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }));
+                setUsers(usersList);
+            } catch (error) {
+                console.log("Error fetching users:", error);
+            }
+        };
+        fetchUsers();
+    }, []);
+    
 
-        return () => {
-            processing = false;
+    useEffect(() => { //add functionality to not show current user
+        if (users.length > 0) {
+            const listener = EventRegister.addEventListener("NextUser", () => {
+                console.log("cardflip changed user");
+                setCurrentIndex(prevIndex => (prevIndex + 1) % users.length);
+                if(users[currentIndex].uid == currentUser.uid){
+                    setCurrentIndex(prevIndex => (prevIndex + 1) % users.length);
+                }
+            });
+    
+            return () => EventRegister.removeEventListener(listener);
         }
-    }, [])
-
-    const firebaseData = async(processing) => {
-        //this gets user by id
-     
-        const collectionRef = collection(FIREBASE_DB, 'UserInfo');
-        //access user
-        var user = FIREBASE_AUTH.currentUser;
-        const docRef = doc(FIREBASE_DB, 'UserInfo', String(user.uid));
-        
-        //get user's info, getDoc = getRow in userInfo table
-        const docSnap = await getDoc(docRef);
-        if(docSnap.exists()){
-            console.log(docSnap.data());
-            //set the data
-            setFireData(docSnap.data());
-        } else{
-            console.log("User with the id doesn't exist. Fetch failed.")
-        }
-    }
-
-    console.log(fireData ? fireData.first_name : "null")
+    }, [users]);
+    
+    const fireData = users.length > 0 ? users[currentIndex] : null;
+    
+    console.log(fireData ? fireData.firstName : "null");
 
     return (
         <FlipCard 
@@ -60,7 +71,7 @@ function CardFlip() {
                 <View style={cardFlip.profile}>
                     <View style={cardFlip.intro}>
                         <Text style={cardFlip.name}>
-                            {fireData ? fireData.first_name : "fetch name failed"},
+                            {fireData ? fireData.firstName : "fetch name failed"},
                         </Text>
                         <Text style={cardFlip.age}>
                             {fireData ? fireData.age : "fetch age failed"}
@@ -79,7 +90,7 @@ function CardFlip() {
                     
 
                     <Text style={cardFlip.bio}>
-                        Introduction or little bio!
+                    {fireData ? fireData.bio : "bio failed"},
                     </Text>
 
                     <View style={cardFlip.tags}>
@@ -98,7 +109,7 @@ function CardFlip() {
                 <View style={cardFlip.profile}>
                     <View style={cardFlip.intro}>
                         <Text style={cardFlip.name}>
-                            {fireData ? fireData.first_name : "fetch name failed"},
+                            {fireData ? fireData.firstName : "fetch name failed"},
                         </Text>
                         <Text style={cardFlip.age}>
                             {fireData ? fireData.age : "fetch age failed"}
@@ -114,7 +125,7 @@ function CardFlip() {
                                 University
                             </Text>
                             <Text style={cardFlip.rowR}>
-                                {fireData ? fireData.school : "fetch school failed"}
+                                {fireData ? fireData.university : "fetch school failed"}
                             </Text>
                         </View>
                         <View style={cardFlip.aboutRow}>

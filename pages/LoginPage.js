@@ -96,4 +96,3 @@ function LoginPage() {
 }
 
 export default LoginPage;
-export const UID = "A";
