@@ -74,6 +74,7 @@ function ChatPage() {
         }
     };
 
+    // navigating to chat
     const openChat = (chatID) => {
         navigation.navigate('Chat', { chatID });
     };
