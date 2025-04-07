@@ -5,6 +5,7 @@ import {collection, getDocs, orderBy, query, doc, setDoc, getDoc} from "firebase
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import { FontAwesome6 } from "@expo/vector-icons";
 import { profilePage, cardFlip } from '../styling';
+import UploadImage from "../components/UploadImage";
 
 function ProfilePage() {
     const [fireData, setFireData] = useState(null);
@@ -40,9 +41,7 @@ function ProfilePage() {
     return (
         <View style={profilePage.full}>
             <View style={profilePage.image}>
-                <Text style={{ fontSize: 15, fontFamily: 'Karla-Bold', color: 'white' }}>
-                    profile picture here
-                </Text>
+                <UploadImage url={fireData ? fireData.imgUrl : null}/>
             </View>
             
             <View style={profilePage.profile}>
