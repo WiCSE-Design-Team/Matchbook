@@ -66,6 +66,9 @@ const styles = StyleSheet.create({
     image: {
         flex: 1,
         width: '100%', // Take up the full height of the container
+        position: 'absolute',
+        top:0,
+        height: '110%',
     },
   });
 
