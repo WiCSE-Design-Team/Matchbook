@@ -130,13 +130,19 @@ function CardFlip() {
                     </Text>
 
                     <View style={cardFlip.tags}>
-                        <View style={cardFlip.tag}>
-                            <Text style={cardFlip.tagText}> {fireData ? fireData.courses[0] : "fetch fail"} </Text>
-                        </View>
-                        <View style={cardFlip.tag}>
-                            <Text style={cardFlip.tagText}> course name </Text>
-                        </View>
+                        {fireData && fireData.courses && fireData.courses.length > 0 ? (
+                            fireData.courses.map((course, index) => (
+                            <View key={index} style={cardFlip.tag}>
+                                <Text style={cardFlip.tagText}>{course}</Text>
+                            </View>
+                            ))
+                        ) : (
+                            <View style={cardFlip.tag}>
+                                <Text style={cardFlip.tagText}>fetch course fail</Text>
+                            </View>
+                        )}
                     </View>
+
                 </View>
             </View>
 
