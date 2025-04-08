@@ -3,7 +3,7 @@ import * as React from 'react';
 import { View, Text, Button, TextInput, StyleSheet, Image, BackHandler, TouchableOpacity, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FIREBASE_AUTH } from '../FirebaseConfig';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
 import { Ionicons } from "@expo/vector-icons";
 
 import logo from '../assets/images/logo.png';
@@ -21,6 +21,13 @@ function LoginPage() {
             const response = await signInWithEmailAndPassword(auth, email, password);
             console.log(response);
             alert("Sign in successful.");
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                  //const uid = user.uid;
+                } else {
+                  console.log("No user is currently signed in.");
+                }
+              });
             navigation.navigate('TabNav');
         } catch (error) {
             console.log(error);

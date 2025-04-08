@@ -63,6 +63,8 @@ function ProfileCreationPage() {
                 bio: bio,
                 prompt: prompt,
                 response: response,
+                match: [],
+                want: [],
             });
 
             console.log('new chat created with id: ', newUser.id);
