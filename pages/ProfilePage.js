@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import {View, Text, Image, ScrollView, StyleSheet} from 'react-native';
+import {View, Text, Image, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 import { FIREBASE_AUTH, FIREBASE_DB } from '../FirebaseConfig';
 import {collection, getDocs, orderBy, query, doc, setDoc, getDoc} from "firebase/firestore";
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import { FontAwesome6 } from "@expo/vector-icons";
 import { profilePage, cardFlip } from '../styling';
+import { useNavigation } from '@react-navigation/native';
+import { signOut } from 'firebase/auth';
 
 function ProfilePage() {
     const [fireData, setFireData] = useState(null);
+    const navigation = useNavigation();
     
     useEffect(() => {
         let processing = true;
@@ -27,15 +30,36 @@ function ProfilePage() {
         const docRef = doc(FIREBASE_DB, 'UserInfo', String(user.uid));
         
         //get user's info, getDoc = getRow in userInfo table
-        const docSnap = await getDoc(docRef);
-        if(docSnap.exists()){
-            console.log(docSnap.data());
-            //set the data
-            setFireData(docSnap.data());
-        } else{
-            console.log("User with the id doesn't exist. Fetch failed.")
+        if (user) {
+            const docRef = doc(FIREBASE_DB, 'UserInfo', String(user.uid));
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                console.log(docSnap.data());
+                setFireData(docSnap.data());
+            } else {
+                console.log("User with the id doesn't exist. Fetch failed.")
+            }
+        } else {
+            console.log("No user currently logged in.");
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Login' }],
+            });
         }
     }
+
+    const handleLogout = async () => {
+        try {
+            await signOut(FIREBASE_AUTH);
+            console.log("User logged out!");
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Login' }],
+            });
+        } catch (error) {
+            console.error("Error signing out: ", error);
+        }
+    };
 
     return (
         <View style={profilePage.full}>
@@ -59,7 +83,10 @@ function ProfilePage() {
                         </Text>
                     </View>
 
-                    <FontAwesome6 name="arrow-right-from-bracket" size={22} color="#9E122C" />
+                    <TouchableOpacity onPress={handleLogout}>
+                        <FontAwesome6 name="arrow-right-from-bracket" size={22} color="#9E122C" />
+                    </TouchableOpacity>
+
                 </View>
                 
                 <View style={profilePage.about}>
