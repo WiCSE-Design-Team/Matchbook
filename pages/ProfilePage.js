@@ -54,7 +54,7 @@ function ProfilePage() {
     return (
         <View style={profilePage.full}>
             <View style={profilePage.image}>
-                <UploadImage url={fireData ? fireData.imgUrl : null}/>
+                <UploadImage url={user ? user.imgUrl : null}/>
             </View>
             
             <View style={profilePage.profile}>
