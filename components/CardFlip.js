@@ -131,7 +131,7 @@ function CardFlip() {
 
                     <View style={cardFlip.tags}>
                         <View style={cardFlip.tag}>
-                            <Text style={cardFlip.tagText}> course name </Text>
+                            <Text style={cardFlip.tagText}> {fireData ? fireData.courses[0] : "fetch fail"} </Text>
                         </View>
                         <View style={cardFlip.tag}>
                             <Text style={cardFlip.tagText}> course name </Text>
@@ -189,15 +189,6 @@ function CardFlip() {
                             </Text>
                         <Text style={cardFlip.response}>
                             {fireData ? fireData.response : "fetch response failed"}
-                        </Text>                         
-                    </View>
-                    <View style={cardFlip.prompts}>
-                        <Text style={cardFlip.prompt}>
-                            {/* placeholder prompt - will be dynamic */}
-                            My study style is
-                        </Text>
-                        <Text style={cardFlip.response}>
-                            {fireData ? fireData.study_style : "fetch style failed"}
                         </Text>                         
                     </View>
                 </View>

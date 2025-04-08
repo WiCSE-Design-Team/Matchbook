@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { View, TextInput, SafeAreaView, KeyboardAvoidingView, TouchableOpacity, Text, ScrollView } from 'react-native';
+import { MultiSelect } from 'react-native-element-dropdown';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
+import { CISEcourses } from '../components/Courses';
+import { multiselect } from '../styling';
 import { profileCreationPage } from '../styling';
 import { Dropdown } from 'react-native-element-dropdown';
 import { FIREBASE_DB } from '../FirebaseConfig';
@@ -20,6 +24,8 @@ function ProfileCreationPage() {
     const [bio, setBio] = React.useState('');
     const [prompt, setPrompt] = React.useState('');
     const [response, setResponse] = React.useState('');
+    const [courses, setCourses] = useState([]);
+    
     
     const prompts = [
         {
@@ -63,6 +69,7 @@ function ProfileCreationPage() {
                 bio: bio,
                 prompt: prompt,
                 response: response,
+                courses: courses,
                 match: [],
                 want: [],
             });
@@ -166,6 +173,34 @@ function ProfileCreationPage() {
                         placeholderTextColor='#F99D90'
                         value = {response}
                     />
+
+             <MultiSelect
+                style={multiselect.dropdown}
+                placeholderStyle={multiselect.placeholder}
+                selectedTextStyle={multiselect.selectedText}
+                itemTextStyle={multiselect.itemText}
+                inputSearchStyle={multiselect.inputSearch}
+                iconStyle={multiselect.icon}
+                containerStyle={multiselect.list}
+                maxHeight={200}
+                iconColor='white'
+                search
+                data={CISEcourses}
+                labelField="courseCode"
+                valueField="courseCode"
+                placeholder="Select Course"
+                searchPlaceholder="Search..."
+                alwaysRenderSelectedItem
+                maxSelect={4}
+                value={courses}
+                onChange={item => {
+                setCourses(item);
+                }}
+                renderLeftIcon={() => (
+                    <FontAwesome6 name="filter" size={22} color="white" style={multiselect.icon} />
+                )}
+                selectedStyle={multiselect.selected}
+            />
 
                     <TouchableOpacity style={profileCreationPage.button} onPress={() => createProfile(currentUser.uid, firstName, lastName, pronouns, age, university, year, major, bio, prompt, response)}>
                         <Text style={profileCreationPage.buttonText}>Create Profile</Text>
