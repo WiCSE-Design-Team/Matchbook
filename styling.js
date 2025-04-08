@@ -214,6 +214,78 @@ export const chatPage = StyleSheet.create({
       },
 });
 
+export const individualChat = StyleSheet.create({
+    fullscreen: {
+        flex: 1,
+        backgroundColor: 'white',
+    },
+
+    navBar: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 16,
+        borderBottomWidth: 1.5,
+        borderColor: '#FDE6E3',
+    },
+
+    header:{
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#9E122C',
+        marginLeft: 10,
+        textAlign: "center",
+        flex: 1,
+    },
+
+    body: {
+        flex: 1,
+        padding: 16,
+    },
+
+    message: {
+        backgroundColor: '#9E122C',
+        borderRadius: 20,
+        padding: 13,
+        marginBottom: 5,
+        marginTop: 10,
+        alignSelf: 'flex-end',  
+        maxWidth: '80%',
+
+    },
+
+    messageText: {
+        fontSize: 15,
+        color: 'white',
+    },
+
+    inputBar: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderColor: '#FDE6E3',
+        backgroundColor: 'white',
+        margin: 10,
+        
+    },
+
+    inputText: {
+        fontSize: 15,
+        fontFamily: 'Karla-Bold',
+        color: '#F99D90',
+        backgroundColor: '#FDE6E3',
+        flex: 1,
+        padding: 15,
+        borderRadius: 30,
+    },
+
+    sendButton: {
+        backgroundColor: '#9E122C',
+        padding: 10,
+        borderRadius: 25,
+        marginLeft: 10,
+    }
+
+})
+
 export const profileCreationPage = StyleSheet.create({
     fullScreen: {
         alignItems: 'center',
