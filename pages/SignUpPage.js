@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
-import { View, Text, Button, TextInput, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Button, TextInput, Image, TouchableOpacity, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FIREBASE_AUTH, FIREBASE_DB } from '../FirebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
@@ -88,6 +88,16 @@ function SignUpPage() {
                 <Text style={loginPage.subtitle}>FIND YOUR STUDY MATCH</Text>
             </View>
 
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                style={{ flex: 1 }}
+                >
+                <ScrollView 
+                contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }} 
+                keyboardShouldPersistTaps="handled"
+                >
+
             <View style={loginPage.lower}>
                 <Text style={loginPage.welcome}> Welcome! Sign Up Here</Text>
 
@@ -97,7 +107,7 @@ function SignUpPage() {
                         style={loginPage.input}
                         onChangeText = {setEmail}
                         placeholder='Email'
-                        placeholderTextColor='#F99D90'
+                        placeholderTextColor='#9E122C'
                         value = {email}
                     />
                 </View>
@@ -109,24 +119,10 @@ function SignUpPage() {
                         style={loginPage.input}
                         onChangeText = {setPass}
                         placeholder='Password'
-                        placeholderTextColor='#F99D90'
+                        placeholderTextColor='#9E122C'
                         value = {password}
                     />
                 </View>
-
-                {/* feel free to delete the confirm password, just thought it would be a cool feature if possible */}
-                <View style={loginPage.inputContainer}>
-                    <Ionicons name="lock-closed" size={20} color="#9E122C" style={loginPage.iconStyle} />
-                    <TextInput
-                        secureTextEntry
-                        style={loginPage.input}
-                        onChangeText = {setConfirmPass}
-                        placeholder='Confirm Password'
-                        placeholderTextColor='#F99D90'
-                        value = {confirmPassword}
-                    />
-                </View>
-
                 <TouchableOpacity style={loginPage.button} onPress = {signUp}>
                     <Text style={loginPage.buttonText}>Sign Up</Text>
                 </TouchableOpacity>
@@ -135,6 +131,9 @@ function SignUpPage() {
                     Back to Login
                 </Text>
             </View>
+            </ScrollView>
+            </KeyboardAvoidingView>
+            </TouchableWithoutFeedback>
         </View>
     );
 }

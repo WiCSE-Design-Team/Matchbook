@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
-import {View, Text, Image, ScrollView, StyleSheet} from 'react-native';
+import {View, Text, Image, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 import { FIREBASE_AUTH, FIREBASE_DB } from '../FirebaseConfig';
 import {collection, getDocs, orderBy, query, doc, setDoc, getDoc, where} from "firebase/firestore";
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import { FontAwesome6 } from "@expo/vector-icons";
 import { profilePage, cardFlip } from '../styling';
+import { useNavigation } from '@react-navigation/native';
+import { signOut } from 'firebase/auth';
 import { getAuth } from "firebase/auth";
 
 function ProfilePage() {
+    const navigation = useNavigation();
     const [user, setUser] = useState(null);
 
     const currentUID = getAuth().currentUser.uid;
-
+  
     useEffect(() => {
         const fetchUser = async () => {
             const usersRef = collection(FIREBASE_DB, 'users');
@@ -36,6 +39,19 @@ function ProfilePage() {
 
     const prompt = user.prompt && typeof user.prompt === "object" ? user.prompt : {};
 
+    const handleLogout = async () => {
+        try {
+            await signOut(FIREBASE_AUTH);
+            console.log("User logged out!");
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Login' }],
+            });
+        } catch (error) {
+            console.error("Error signing out: ", error);
+        }
+    };
+
     return (
         <View style={profilePage.full}>
             <View style={profilePage.image}>
@@ -58,7 +74,10 @@ function ProfilePage() {
                         </Text>
                     </View>
 
-                    <FontAwesome6 name="arrow-right-from-bracket" size={22} color="#9E122C" />
+                    <TouchableOpacity onPress={handleLogout}>
+                        <FontAwesome6 name="arrow-right-from-bracket" size={22} color="#9E122C" />
+                    </TouchableOpacity>
+
                 </View>
                 
                 <View style={profilePage.about}>
