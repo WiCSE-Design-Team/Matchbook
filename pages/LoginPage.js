@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
-import { View, Text, Button, TextInput, StyleSheet, Image, BackHandler, TouchableOpacity } from 'react-native';
+import { View, Text, Button, TextInput, StyleSheet, Image, BackHandler, TouchableOpacity, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FIREBASE_AUTH } from '../FirebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
@@ -48,20 +48,29 @@ function LoginPage() {
                 <Text style={loginPage.subtitle}>FIND YOUR STUDY MATCH</Text>
             </View>
 
+
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={{ flex: 1 }}
+            >
+            <ScrollView 
+            contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }} 
+            keyboardShouldPersistTaps="handled"
+            >
             <View style={loginPage.lower}>
                 <Text style={loginPage.welcome}>Welcome! Login In Here</Text>
-                
                 <View style={loginPage.inputContainer}>
                     <Ionicons name="mail" size={20} color="#9E122C" style={loginPage.iconStyle} />
                     <TextInput
                         style={loginPage.input}
                         onChangeText = {setEmail}
                         placeholder='Email'
-                        placeholderTextColor='#F99D90'
+                        placeholderTextColor='#9E122C'
                         value = {email}
                     />
                 </View>
-
+                
                 <View style={loginPage.inputContainer}>
                     <Ionicons name="lock-closed" size={20} color="#9E122C" style={loginPage.iconStyle} />
                     <TextInput
@@ -69,10 +78,10 @@ function LoginPage() {
                         style={loginPage.input}
                         onChangeText = {setPass}
                         placeholder='Password'
-                        placeholderTextColor='#F99D90'
+                        placeholderTextColor='#9E122C'
                         value = {password}
                     />
-                </View>
+                </View>    
 
                 <TouchableOpacity style={loginPage.button} onPress={signIn}>
                     <Text style={loginPage.buttonText}>Login</Text>
@@ -84,7 +93,11 @@ function LoginPage() {
                     <Text style={loginPage.buttonText}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
+            </ScrollView>
+            </KeyboardAvoidingView>
+            </TouchableWithoutFeedback>
         </View>
+
     );
 }
 

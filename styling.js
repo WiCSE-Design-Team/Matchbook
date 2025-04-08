@@ -28,7 +28,7 @@ export const loginPage = StyleSheet.create({
         justifyContent: 'center', 
         width: '100%',
         height: '60%',
-        backgroundColor: '#FDE6E3',
+        backgroundColor: 'white',
         borderTopLeftRadius: 100,
         borderTopRightRadius: 100,
     },
@@ -42,7 +42,7 @@ export const loginPage = StyleSheet.create({
     },
     inputContainer: {
         flexDirection: "row",
-        backgroundColor: 'white',
+        backgroundColor: '#FDE6E3',
         borderRadius: 25,
         paddingHorizontal: 15,
         width: 300,
