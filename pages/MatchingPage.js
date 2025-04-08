@@ -3,22 +3,50 @@ import { SafeAreaView, View, Text, Pressable } from 'react-native';
 import { EventRegister } from "react-native-event-listeners"; 
 import MultiSelectComponent from '../components/MultiSelect';
 import CardFlip from '../components/CardFlip';
-import { FIREBASE_USERINFO, FIREBASE_USERS } from '../FirebaseConfig';
+import { FIREBASE_USERS } from '../FirebaseConfig';
 import { getAuth } from 'firebase/auth';
-import {doc, arrayUnion, getDocs} from "firebase/firestore";
+import {doc, getDoc, arrayUnion, getDocs, updateDoc} from "firebase/firestore";
 import { matchingPage } from '../styling';
-import { getUserByID } from '../components/Requests';
 
 function MatchingPage() {
-    const currentUser = getAuth().currentUser;
-    const userInfo = FIREBASE_USERS;
     const [users, setUsers] = useState([]);
+    const [currentUser, setCurrentUser] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0);
-    
+
+    const fetchUserById = async (userId) => {
+        if (!userId) return null;
+        try {
+            const userRef = doc(FIREBASE_USERS, userId);
+            const userSnap = await getDoc(userRef);
+            if (userSnap.exists()) {
+                return { id: userSnap.id, ...userSnap.data() };
+            } else {
+                console.log("No such user!");
+                return null;
+            }
+        } catch (error) {
+            console.log("Error fetching user:", error);
+            return null;
+        }
+    };
+
+    useEffect(() => {
+        const loadUser = async () => {
+            const user = getAuth().currentUser;
+            if (user) {
+                const userData = await fetchUserById(user.uid);
+                setCurrentUser(userData);
+            } else {
+                console.log('No user signed in');
+            }
+        };
+        loadUser();
+    }, []);
+
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const querySnapshot = await getDocs(userInfo);
+                const querySnapshot = await getDocs(FIREBASE_USERS);
                 const usersList = querySnapshot.docs.map(doc => ({
                     id: doc.id,
                     ...doc.data(),
@@ -30,44 +58,49 @@ function MatchingPage() {
         };
         fetchUsers();
     }, []);
-    
 
     useEffect(() => {
-        if (users.length > 0) {
+        if (users.length > 0 && currentUser) {
             const listener = EventRegister.addEventListener("NextUser", () => {
-                console.log("matching page changed user");
-                setCurrentIndex(prevIndex => (prevIndex + 1) % users.length);
-                if(users[currentIndex].uid == currentUser.uid){
-                    setCurrentIndex(prevIndex => (prevIndex + 1) % users.length);
+                let nextIndex = (currentIndex + 1) % users.length;
+    
+                // Keep skipping until we find a user who is not the currentUser
+                while (users[nextIndex].uid === currentUser.uid && users.length > 1) {
+                    nextIndex = (nextIndex + 1) % users.length;
                 }
+    
+                setCurrentIndex(nextIndex);
             });
     
             return () => EventRegister.removeEventListener(listener);
         }
-    }, [users]);
-    
-    const fireData = users.length > 0 ? users[currentIndex] : null;
-    
-    console.log(fireData ? fireData.firstName : "null");
-    
+    }, [users, currentIndex, currentUser]);
 
-    /*
-    //need way to get user at top of collection (!= currUser)
-    //getAllUsers in Requests.js returns array of users
-    //const displayedUser
-    //const displayedUser = top user of collection
+    const fireData = users.length > 0 ? users[currentIndex] : null;
+
     const addApproved = async () => {
-        await updateDoc(currUser, {
-            want: arrayUnion("DISPLAY USER'S ID"), //need to access uid of user at top of collection
-          });
-        if(currUser UID is in displayedUser want field){
-            await updateDoc(currUser, {
-                matches: arrayUnion("DISPLAY USER'S ID"), //need to access uid of user at top of collection
-             });
-            alert("New match! Go to chat page to start connecting.");
+        if (!fireData || !currentUser || fireData.uid === currentUser.uid) return;
+        try {
+            const currentRef = doc(FIREBASE_USERS, currentUser.uid);
+            const fireRef = doc(FIREBASE_USERS, fireData.uid);
+
+            await updateDoc(currentRef, {
+                want: arrayUnion(fireData.uid),
+            });
+
+            if (fireData.want && fireData.want.includes(currentUser.uid)) {
+                alert("New match! Go to chat page to start connecting.");
+                await updateDoc(currentRef, {
+                    match: arrayUnion(fireData.uid),
+                });
+                await updateDoc(fireRef, {
+                    match: arrayUnion(currentUser.uid),
+                });
+            }
+        } catch (error) {
+            console.log("Error updating matches:", error);
         }
-        
-    }*/
+    };
 
     return (
         <SafeAreaView style={matchingPage.fullScreen}>
@@ -92,8 +125,8 @@ function MatchingPage() {
                 <Pressable
                     onPress = {() => {
                         EventRegister.emit("NextUser");
-
-                    }} //need to add to collection, check if present in other collection array
+                        addApproved();
+                    }}
                     style={({ pressed }) => [{ backgroundColor: pressed ? 'none' : '#9E122C' }, matchingPage.matchButton ]}>
                     {({ pressed }) => (
                         <Text style={[{ color: pressed ? '#9E122C' : 'white' }, matchingPage.buttonText]}>

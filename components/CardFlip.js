@@ -12,15 +12,44 @@ import { cardFlip } from '../styling'
 import { FontAwesome6 } from "@expo/vector-icons";
 
 function CardFlip() {
-    const userInfo = FIREBASE_USERS;
-    const currentUser = getAuth().currentUser;
     const [users, setUsers] = useState([]);
+    const [currentUser, setCurrentUser] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0);
-    
+
+    const fetchUserById = async (userId) => {
+        if (!userId) return null;
+        try {
+            const userRef = doc(FIREBASE_USERS, userId);
+            const userSnap = await getDoc(userRef);
+            if (userSnap.exists()) {
+                return { id: userSnap.id, ...userSnap.data() };
+            } else {
+                console.log("No such user!");
+                return null;
+            }
+        } catch (error) {
+            console.log("Error fetching user:", error);
+            return null;
+        }
+    };
+
+    useEffect(() => {
+        const loadUser = async () => {
+            const user = getAuth().currentUser;
+            if (user) {
+                const userData = await fetchUserById(user.uid);
+                setCurrentUser(userData);
+            } else {
+                console.log('No user signed in');
+            }
+        };
+        loadUser();
+    }, []);
+
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const querySnapshot = await getDocs(userInfo);
+                const querySnapshot = await getDocs(FIREBASE_USERS);
                 const usersList = querySnapshot.docs.map(doc => ({
                     id: doc.id,
                     ...doc.data(),
@@ -32,25 +61,25 @@ function CardFlip() {
         };
         fetchUsers();
     }, []);
-    
 
-    useEffect(() => { //add functionality to not show current user
-        if (users.length > 0) {
+    useEffect(() => {
+        if (users.length > 0 && currentUser) {
             const listener = EventRegister.addEventListener("NextUser", () => {
-                console.log("cardflip changed user");
-                setCurrentIndex(prevIndex => (prevIndex + 1) % users.length);
-                if(users[currentIndex].uid == currentUser.uid){
-                    setCurrentIndex(prevIndex => (prevIndex + 1) % users.length);
+                let nextIndex = (currentIndex + 1) % users.length;
+    
+                // Keep skipping until we find a user who is not the currentUser
+                while (users[nextIndex].uid === currentUser.uid && users.length > 1) {
+                    nextIndex = (nextIndex + 1) % users.length;
                 }
+    
+                setCurrentIndex(nextIndex);
             });
     
             return () => EventRegister.removeEventListener(listener);
         }
-    }, [users]);
-    
+    }, [users, currentIndex, currentUser]);
+
     const fireData = users.length > 0 ? users[currentIndex] : null;
-    
-    console.log(fireData ? fireData.firstName : "null");
 
     return (
         <FlipCard 
@@ -90,7 +119,7 @@ function CardFlip() {
                     
 
                     <Text style={cardFlip.bio}>
-                    {fireData ? fireData.bio : "bio failed"},
+                    {fireData ? fireData.bio : "bio failed"}
                     </Text>
 
                     <View style={cardFlip.tags}>
@@ -133,7 +162,7 @@ function CardFlip() {
                                 Academic Year
                             </Text>
                             <Text style={cardFlip.rowR}>
-                                Senior
+                                {fireData ? fireData.year : "fetch year failed"}
                             </Text>
                         </View>
                         <View style={cardFlip.aboutRow}>
@@ -149,10 +178,10 @@ function CardFlip() {
                     <View style={cardFlip.prompts}>
                         <Text style={cardFlip.prompt}>
                             {/* placeholder prompt - will be dynamic */}
-                            My least favorite study spot is
-                        </Text>
+                                {fireData ? fireData.prompt.prompt : "fetch prompt failed"}
+                            </Text>
                         <Text style={cardFlip.response}>
-                            {fireData ? fireData.leastSpot : "fetch spot failed"}
+                            {fireData ? fireData.response : "fetch response failed"}
                         </Text>                         
                     </View>
                     <View style={cardFlip.prompts}>
