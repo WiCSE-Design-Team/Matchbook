@@ -37,8 +37,6 @@ function ProfilePage() {
         fetchUser();
     }, []);
 
-    const prompt = user.prompt && typeof user.prompt === "object" ? user.prompt : {};
-
     const handleLogout = async () => {
         try {
             await signOut(FIREBASE_AUTH);
@@ -114,7 +112,7 @@ function ProfilePage() {
                 <ScrollView horizontal = {true} showsHorizontalScrollIndicator={true} contentContainerStyle={profilePage.scrollView}> 
                     <View style={profilePage.prompts}>
                         <Text style={profilePage.prompt}>
-                            {prompt ? prompt.prompt : "fetch failed"}
+                            
                         </Text>
                         <Text style={profilePage.response}>
                             {user ? user.response : "fetch failed"}
