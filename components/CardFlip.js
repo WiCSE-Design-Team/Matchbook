@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Image, Text } from 'react-native';
 import FlipCard from 'react-native-flip-card';
 import { EventRegister } from "react-native-event-listeners"; 
+import { StyleSheet } from "react-native";
 
 import { FIREBASE_AUTH, FIREBASE_DB } from '../FirebaseConfig';
 import { FIREBASE_USERINFO , FIREBASE_USERS} from '../FirebaseConfig';
@@ -94,7 +95,13 @@ function CardFlip() {
             <View style={cardFlip.front}>
                 
                 <View style={cardFlip.image}>
-                    
+                    {fireData && fireData.imgUrl &&
+                        <Image
+                        source={{ url: fireData.imgUrl }}
+                        style={styles.image}
+                        resizeMode="cover"
+                        />
+                    }
                 </View>
 
                 <View style={cardFlip.profile}>
@@ -198,5 +205,22 @@ function CardFlip() {
         </FlipCard>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1, // Fill the available space
+      width: '100%',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    image: {
+        flex: 1,
+        width: '100%', // Take up the full height of the container
+        borderRadius: 10,
+        position: "absolute",
+        top:0,
+        height:'110%'
+    },
+  });
 
 export default CardFlip;
