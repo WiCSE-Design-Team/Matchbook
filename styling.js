@@ -307,19 +307,18 @@ export const profileCreationPage = StyleSheet.create({
     }, 
 
     inputs: {
-        marginTop: 20,
-        width: '100%',
+        marginTop: 20, marginLeft: 20, marginRight: 20,
     },
 
     input: {
-        marginBottom: 20, marginLeft: 20, marginRight: 20,
+        marginBottom: 20,
         paddingLeft: 20, paddingTop: 12, paddingBottom: 12,
         borderRadius: 100,
         backgroundColor: '#FDE6E3',
         fontFamily: 'Karla', color: '#9E122C', fontSize: 14
     },
     button: {
-        marginLeft: 20, marginRight: 20,
+        marginTop: 20, marginBottom: 20,
         padding: 10,
         borderWidth: 1, borderRadius: 100, borderColor: '#9E122C',
         backgroundColor: '#9E122C',
@@ -329,7 +328,7 @@ export const profileCreationPage = StyleSheet.create({
         textAlign: 'center'
     },
     dropdown: {
-        marginBottom: 20, marginLeft: 20, marginRight: 20,
+        marginBottom: 20,
         paddingLeft: 20, paddingTop: 12, paddingBottom: 12,
         borderRadius: 100,
         backgroundColor: '#FDE6E3',
@@ -345,7 +344,16 @@ export const profileCreationPage = StyleSheet.create({
     },
     list: {
         borderRadius: 15
-    }
+    },
+    inputSearch: {
+        height: 40,
+        borderRadius: 50,
+        fontFamily: 'Karla', fontSize: 12,
+    },
+    selected: {
+        borderRadius: 50, borderColor: '#9E122C',
+        gap: 10,
+    },
 })
 
 export const profilePage = StyleSheet.create({

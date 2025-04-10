@@ -174,33 +174,30 @@ function ProfileCreationPage() {
                         value = {response}
                     />
 
-             <MultiSelect
-                style={multiselect.dropdown}
-                placeholderStyle={multiselect.placeholder}
-                selectedTextStyle={multiselect.selectedText}
-                itemTextStyle={multiselect.itemText}
-                inputSearchStyle={multiselect.inputSearch}
-                iconStyle={multiselect.icon}
-                containerStyle={multiselect.list}
-                maxHeight={200}
-                iconColor='white'
-                search
-                data={CISEcourses}
-                labelField="courseCode"
-                valueField="courseCode"
-                placeholder="Select Course"
-                searchPlaceholder="Search..."
-                alwaysRenderSelectedItem
-                maxSelect={4}
-                value={courses}
-                onChange={item => {
-                setCourses(item);
-                }}
-                renderLeftIcon={() => (
-                    <FontAwesome6 name="filter" size={22} color="white" style={multiselect.icon} />
-                )}
-                selectedStyle={multiselect.selected}
-            />
+                    <MultiSelect
+                        style={profileCreationPage.dropdown}
+                        placeholderStyle={profileCreationPage.placeholder}
+                        selectedTextStyle={profileCreationPage.selectedText}
+                        itemTextStyle={profileCreationPage.itemText}
+                        inputSearchStyle={profileCreationPage.inputSearch}
+                        iconStyle={profileCreationPage.icon}
+                        containerStyle={profileCreationPage.list}
+                        maxHeight={200}
+                        search
+                        data={CISEcourses}
+                        labelField="courseCode"
+                        valueField="courseCode"
+                        placeholder="Select Courses"
+                        searchPlaceholder="Search..."
+                        alwaysRenderSelectedItem
+                        maxSelect={4}
+                        value={courses}
+                        onChange={item => {
+                            setCourses(item);
+                        }}
+                        keyboardAvoiding
+                        selectedStyle={profileCreationPage.selected}
+                    />
 
                     <TouchableOpacity style={profileCreationPage.button} onPress={() => createProfile(currentUser.uid, firstName, lastName, pronouns, age, university, year, major, bio, prompt, response)}>
                         <Text style={profileCreationPage.buttonText}>Create Profile</Text>
