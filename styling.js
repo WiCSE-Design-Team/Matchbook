@@ -186,6 +186,7 @@ export const chatPage = StyleSheet.create({
         paddingBottom: 20,
     },
     match: {
+        marginRight: 20,
         flexDirection: 'column',
         alignItems: 'center', justifyContent: 'center', gap: 5
         

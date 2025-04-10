@@ -46,7 +46,7 @@ function Chat({ route }) {
                 </TouchableOpacity>
 
                 <Text style={individualChat.header}>
-                    Name
+                    {name}
                 </Text>
 
                 <Ionicons name="person-circle" size={45} color="#9E122C" />

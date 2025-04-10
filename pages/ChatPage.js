@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import * as React from 'react';
-import { ScrollView, Image, View, Text, SafeAreaView, Dimensions, FlatList } from 'react-native';
+import { ScrollView, Image, View, Text, SafeAreaView, Dimensions, FlatList, TouchableOpacity } from 'react-native';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 import { chatPage } from '../styling';
@@ -22,7 +22,7 @@ function ChatPage() {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const querySnapshot = await getDocs(collection(FIREBASE_DB, 'UserInfo'));
+                const querySnapshot = await getDocs(collection(FIREBASE_DB, 'users'));
                 const usersList = querySnapshot.docs.map(doc => ({
                     id: doc.id,
                     ...doc.data(),
@@ -56,13 +56,13 @@ function ChatPage() {
     }, [currentUser]);
 
     // adds document to chats collection
-    const createChat = async (currentUID, otherUID) => {
+    const createChat = async (currentUID, otherUID, otherName) => {
         const chatsCollectionRef = collection(FIREBASE_DB, 'chats');
 
         try {
             const newChat = await addDoc(chatsCollectionRef, {
                 users: [currentUID, otherUID],
-                name: `${otherUID}`,
+                name: `${otherName}`,
                 lastMessage: '',
             });
 
@@ -72,11 +72,6 @@ function ChatPage() {
             console.log('error creating new chat: ', error);
             return null;
         }
-    };
-
-    // navigating to chat
-    const openChat = (chatID) => {
-        navigation.navigate('Chat', { chatID });
     };
 
     return (
@@ -93,13 +88,13 @@ function ChatPage() {
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     {users.map((user, id)=> {
                         return (
-                            <View key={id} style={chatPage.match} onTouchEnd={() => createChat(currentUser.uid, 'temp uid')}>
+                            <TouchableOpacity key={id} style={chatPage.match} onPress={() => createChat(currentUser.uid, user.uid, user.firstName)}>
                                 <View style={chatPage.matchIcon}>
                                     <FontAwesome6 name="user" size={20} color='#9E122C' />
                                 </View>
 
-                                <Text style={chatPage.matchName}>{user.first_name}</Text>
-                            </View>
+                                <Text style={chatPage.matchName}>{user.firstName}</Text>
+                            </TouchableOpacity>
                         )
                     })}
                 </ScrollView>
@@ -110,7 +105,7 @@ function ChatPage() {
                 {chats.map((chat, id)=> {
                     console.log(chat.name);
                     return(
-                        <View key={id} style={chatPage.chat} onTouchEnd={openChat}>
+                        <TouchableOpacity key={id} style={chatPage.chat} onPress={() => { navigation.navigate('Chat', { name: chat.name }); }}>
                             <View style={chatPage.user}>
                                 <View style={chatPage.icon}>
                                     <FontAwesome6 name="user" size={20} color='white' />
@@ -122,7 +117,7 @@ function ChatPage() {
                             <View style={chatPage.arrow}>
                                 <FontAwesome6 name="chevron-right" size={25} color="#9E122C" />
                             </View>
-                        </View>
+                        </TouchableOpacity>
                     )
                 })}
             </ScrollView>
