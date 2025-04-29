@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {View, Text, Image, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
 import { FIREBASE_AUTH, FIREBASE_DB } from '../FirebaseConfig';
-import {collection, getDocs, orderBy, query, doc, setDoc, getDoc, where} from "firebase/firestore";
-import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
+import {collection, getDocs, query, where} from "firebase/firestore";
 import { FontAwesome6 } from "@expo/vector-icons";
-import { profilePage, cardFlip } from '../styling';
+import { profilePage } from '../styling';
 import UploadImage from "../components/UploadImage";
 import { useNavigation } from '@react-navigation/native';
 import { signOut } from 'firebase/auth';
@@ -54,7 +53,7 @@ function ProfilePage() {
     return (
         <View style={profilePage.full}>
             <View style={profilePage.image}>
-                <UploadImage url={fireData ? fireData.imgUrl : null}/>
+                <UploadImage url={user ? user.imgUrl : null}/>
             </View>
             
             <View style={profilePage.profile}>

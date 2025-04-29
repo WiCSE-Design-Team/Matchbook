@@ -3,9 +3,9 @@ import { SafeAreaView, View, Text, Pressable } from 'react-native';
 import { EventRegister } from "react-native-event-listeners"; 
 import MultiSelectComponent from '../components/MultiSelect';
 import CardFlip from '../components/CardFlip';
-import { FIREBASE_USERS } from '../FirebaseConfig';
+import { FIREBASE_USERS, FIREBASE_DB } from '../FirebaseConfig';
 import { getAuth } from 'firebase/auth';
-import {doc, getDoc, arrayUnion, getDocs, updateDoc} from "firebase/firestore";
+import {doc, getDoc, arrayUnion, getDocs, updateDoc, query, where} from "firebase/firestore";
 import { matchingPage } from '../styling';
 
 function MatchingPage() {
@@ -78,11 +78,23 @@ function MatchingPage() {
 
     const fireData = users.length > 0 ? users[currentIndex] : null;
 
+    const getUserDocIdByUid = async (uid) => {
+        const q = query(FIREBASE_USERS, where("uid", "==", uid));
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+            return querySnapshot.docs[0].id;
+        } else {
+            throw new Error(`User with uid ${uid} not found`);
+        }
+    };
     const addApproved = async () => {
         if (!fireData || !currentUser || fireData.uid === currentUser.uid) return;
         try {
-            const currentRef = doc(FIREBASE_USERS, currentUser.uid);
-            const fireRef = doc(FIREBASE_USERS, fireData.uid);
+            const currentUserDocId = await getUserDocIdByUid(currentUser.uid);
+            const fireDataDocId = await getUserDocIdByUid(fireData.uid);
+
+            const currentRef = doc(FIREBASE_DB, "users", currentUserDocId);
+            const fireRef = doc(FIREBASE_DB, "users", fireDataDocId);
 
             await updateDoc(currentRef, {
                 want: arrayUnion(fireData.uid),
